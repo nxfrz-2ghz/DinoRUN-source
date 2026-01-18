@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bi4gfj7do6a8v"
+path="res://.godot/imported/23 Paskchip(easter egg).mp3-18279df2b8bcf0e94da635453cc64662.mp3str"
+
+[deps]
+
+source_file="res://res/music/23 Paskchip(easter egg).mp3"
+dest_files=["res://.godot/imported/23 Paskchip(easter egg).mp3-18279df2b8bcf0e94da635453cc64662.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

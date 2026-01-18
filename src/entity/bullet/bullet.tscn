@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://4dxkgv35wtd6"]
+
+[ext_resource type="Texture2D" uid="uid://brc418dgqsylc" path="res://res/sprites/entity/bullet/bullet.png" id="1_8jhmp"]
+[ext_resource type="Script" uid="uid://5ksjhas4bq7s" path="res://src/entity/bullet/bullet.gd" id="1_cd1s4"]
+[ext_resource type="Script" uid="uid://d2xq26nnydogm" path="res://addons/trail_2d/trail_2d.gd" id="3_h4x35"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cd1s4"]
+radius = 5.0
+height = 32.0
+
+[sub_resource type="Curve" id="Curve_850uu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0766667, 1), 0.0, -1.08303, 0, 1, Vector2(1, 0), -1.08303, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h4x35"]
+polygon = PackedVector2Array(-4, 1, 4, 1, 0, 0)
+
+[node name="Bullet" type="RigidBody2D"]
+mass = 0.05
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_cd1s4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+scale = Vector2(0.265, 0.265)
+shape = SubResource("CapsuleShape2D_cd1s4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.065, 0.065)
+texture = ExtResource("1_8jhmp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Trail2D" type="Line2D" parent="."]
+unique_name_in_owner = true
+width = 3.0
+width_curve = SubResource("Curve_850uu")
+script = ExtResource("3_h4x35")
+length = 3
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_h4x35")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

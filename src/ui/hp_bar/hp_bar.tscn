@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7ibtnd3036x"]
+
+[ext_resource type="PackedScene" uid="uid://bfmy5olrgqquj" path="res://src/ui/pbar_example/p_bar.tscn" id="1_nqkyr"]
+[ext_resource type="Script" uid="uid://cvxe3tiwp8o" path="res://src/ui/hp_bar/hp_bar.gd" id="2_qqoge"]
+
+[node name="HPBar" instance=ExtResource("1_nqkyr")]
+script = ExtResource("2_qqoge")
+
+[node name="IconsContainer" type="HBoxContainer" parent="." index="2"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 5
+alignment = 2

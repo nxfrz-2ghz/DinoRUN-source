@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dywifgy45dyhs"]
+
+[ext_resource type="Script" uid="uid://k4nco11owxaq" path="res://src/entity/item/item.gd" id="1_8wqhi"]
+[ext_resource type="Texture2D" uid="uid://hdy3turfe02v" path="res://res/sprites/world/circle_05.png" id="2_okqnj"]
+[ext_resource type="FontFile" uid="uid://dti745xfqphoj" path="res://res/fonts/Peaberry-Bold.ttf" id="3_7kf25"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sileb"]
+
+[node name="Item" type="RigidBody2D" groups=["drop"]]
+lock_rotation = true
+script = ExtResource("1_8wqhi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sileb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+autoplay = "default"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+enabled = false
+texture = ExtResource("2_okqnj")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -67.0
+offset_right = 62.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_7kf25")
+vertical_alignment = 1

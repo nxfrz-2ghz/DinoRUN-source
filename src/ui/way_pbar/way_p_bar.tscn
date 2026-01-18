@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtlrqceftv3g0"]
+
+[ext_resource type="Texture2D" uid="uid://b0c8teujvhxu7" path="res://res/sprites/progressbars/world_map/MapProgressBarBackground.png" id="1_k04l1"]
+[ext_resource type="Script" uid="uid://juxjfw6ed6d7" path="res://src/ui/way_pbar/way_p_bar.gd" id="1_uemg0"]
+[ext_resource type="FontFile" uid="uid://dti745xfqphoj" path="res://res/fonts/Peaberry-Bold.ttf" id="2_qlty6"]
+
+[sub_resource type="Gradient" id="Gradient_uemg0"]
+colors = PackedColorArray(0, 0, 0, 0.5019608, 1, 0, 0, 0.7411765)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qlty6"]
+gradient = SubResource("Gradient_uemg0")
+width = 200
+height = 20
+
+[node name="WayPBar" type="MarginContainer"]
+custom_minimum_size = Vector2(260, 30)
+offset_right = 200.0
+offset_bottom = 20.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("1_uemg0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("2_qlty6")
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture_under = ExtResource("1_k04l1")
+texture_progress = SubResource("GradientTexture2D_qlty6")

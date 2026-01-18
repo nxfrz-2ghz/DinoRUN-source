@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bapv5lu3pkh72"]
+
+[node name="EffectIcon" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 8
+size_flags_vertical = 8

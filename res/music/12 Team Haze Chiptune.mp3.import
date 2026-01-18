@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://brjpsd7pjnw2t"
+path="res://.godot/imported/12 Team Haze Chiptune.mp3-34493499b529cae2e5ff161ec5b0e161.mp3str"
+
+[deps]
+
+source_file="res://res/music/12 Team Haze Chiptune.mp3"
+dest_files=["res://.godot/imported/12 Team Haze Chiptune.mp3-34493499b529cae2e5ff161ec5b0e161.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

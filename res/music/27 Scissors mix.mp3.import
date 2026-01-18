@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3ey1tr0mkfxe"
+path="res://.godot/imported/27 Scissors mix.mp3-0c41f1401e7f43ed429afc46828e77ea.mp3str"
+
+[deps]
+
+source_file="res://res/music/27 Scissors mix.mp3"
+dest_files=["res://.godot/imported/27 Scissors mix.mp3-0c41f1401e7f43ed429afc46828e77ea.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

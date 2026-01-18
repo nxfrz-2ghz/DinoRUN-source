@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsr0i1ygm5cch"]
+
+[ext_resource type="Script" uid="uid://bfk4xr8h221py" path="res://src/entity/mob/mob.gd" id="1_xcy7r"]
+[ext_resource type="PackedScene" uid="uid://ciqn2labd3uyf" path="res://src/particles/particles.tscn" id="2_706jr"]
+[ext_resource type="AudioStream" uid="uid://bg0suvjsxl4r1" path="res://res/sounds/damage/damage_disconnect.mp3" id="3_lkcec"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcy7r"]
+bg_color = Color(0.6, 0.49019608, 0.49803922, 0.7294118)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybgsk"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="Mob" type="CharacterBody2D"]
+script = ExtResource("1_xcy7r")
+jump_velocity = 0.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+
+[node name="Particles" parent="." instance=ExtResource("2_706jr")]
+amount = 6
+
+[node name="HPBar" type="ProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -32.0
+offset_right = 11.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_xcy7r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ybgsk")
+show_percentage = false
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="DamageAudioPlayer" type="AudioStreamPlayer2D" parent="Audio"]
+bus = &"Sounds"
+
+[node name="DieAudioPlayer" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("3_lkcec")
+bus = &"Sounds"

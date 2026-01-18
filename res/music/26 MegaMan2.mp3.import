@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bc2lujf18kaa0"
+path="res://.godot/imported/26 MegaMan2.mp3-d9ffb2b0e2b215baafa5ddfec9ee7261.mp3str"
+
+[deps]
+
+source_file="res://res/music/26 MegaMan2.mp3"
+dest_files=["res://.godot/imported/26 MegaMan2.mp3-d9ffb2b0e2b215baafa5ddfec9ee7261.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

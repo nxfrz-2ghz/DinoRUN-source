@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://c62s240fk8j0y"]
+
+[ext_resource type="Texture2D" uid="uid://hdy3turfe02v" path="res://res/sprites/world/circle_05.png" id="1_bptx2"]
+
+[node name="SceneLight" type="DirectionalLight2D"]
+color = Color(0, 0, 0, 1)
+energy = 0.15
+blend_mode = 2
+
+[node name="Sun" type="Sprite2D" parent="."]
+position = Vector2(300, 60.46)
+texture = ExtResource("1_bptx2")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sun"]
+position = Vector2(-55.73004, 28.539963)
+scale = Vector2(6.175781, 4.7539063)
+energy = 0.54
+range_item_cull_mask = 3
+shadow_enabled = true
+texture = ExtResource("1_bptx2")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Sun"]
+position = Vector2(0, 1000)
+scale = Vector2(6.175781, 4.7539063)
+color = Color(0, 0, 0, 1)
+energy = 0.3
+blend_mode = 2
+range_item_cull_mask = 3
+texture = ExtResource("1_bptx2")

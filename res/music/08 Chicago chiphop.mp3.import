@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ty2oaeblfm7n"
+path="res://.godot/imported/08 Chicago chiphop.mp3-d6ce731eb8d61d03bda4e60ba5001535.mp3str"
+
+[deps]
+
+source_file="res://res/music/08 Chicago chiphop.mp3"
+dest_files=["res://.godot/imported/08 Chicago chiphop.mp3-d6ce731eb8d61d03bda4e60ba5001535.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

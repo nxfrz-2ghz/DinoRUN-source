@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciqn2labd3uyf"]
+
+[ext_resource type="Script" uid="uid://d1gkmvjh2pgte" path="res://src/particles/particles.gd" id="1_mrrdf"]
+
+[sub_resource type="Gradient" id="Gradient_ur0h8"]
+offsets = PackedFloat32Array(0, 0.57272726, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mrrdf"]
+gradient = SubResource("Gradient_ur0h8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_153e2"]
+particle_flag_disable_z = true
+angle_min = -44.99999
+angle_max = 45.00001
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 40.23
+gravity = Vector3(0, -50, 0)
+color_ramp = SubResource("GradientTexture1D_mrrdf")
+
+[node name="Particles" type="GPUParticles2D"]
+emitting = false
+amount = 3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_153e2")
+script = ExtResource("1_mrrdf")

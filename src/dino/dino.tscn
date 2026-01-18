@@ -1,0 +1,174 @@
+[gd_scene load_steps=24 format=3 uid="uid://bnjouje6b3fha"]
+
+[ext_resource type="Texture2D" uid="uid://33csmqyxcbxg" path="res://res/sprites/characters/dino/DinoSprites.png" id="1_25vyn"]
+[ext_resource type="Script" uid="uid://b4rjkh0fiqj2j" path="res://src/dino/dino.gd" id="1_avrtq"]
+[ext_resource type="Script" uid="uid://b8e1xc0qs4tpl" path="res://src/dino/right_arm.gd" id="3_kv0bq"]
+[ext_resource type="PackedScene" uid="uid://ciqn2labd3uyf" path="res://src/particles/particles.tscn" id="3_v7ad1"]
+[ext_resource type="PackedScene" uid="uid://bjqulewstgjfk" path="res://src/weapon/weapon.tscn" id="4_0d2ky"]
+[ext_resource type="AudioStream" uid="uid://clpolv4smjbax" path="res://res/sounds/damage/damage.mp3" id="5_4032u"]
+[ext_resource type="Script" uid="uid://gbtabcfqvu0m" path="res://src/dino/area_2d.gd" id="5_utwsk"]
+[ext_resource type="AudioStream" uid="uid://dlsv4vkj7j0c2" path="res://res/sounds/attacks/bonk.mp3" id="6_joqhx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avrtq"]
+atlas = ExtResource("1_25vyn")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kv0bq"]
+atlas = ExtResource("1_25vyn")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0d2ky"]
+atlas = ExtResource("1_25vyn")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utwsk"]
+atlas = ExtResource("1_25vyn")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_joqhx"]
+atlas = ExtResource("1_25vyn")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4032u"]
+atlas = ExtResource("1_25vyn")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7ad1"]
+atlas = ExtResource("1_25vyn")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4s8g"]
+atlas = ExtResource("1_25vyn")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdbq3"]
+atlas = ExtResource("1_25vyn")
+region = Rect2(192, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kipjr"]
+atlas = ExtResource("1_25vyn")
+region = Rect2(216, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dxem3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avrtq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kv0bq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0d2ky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utwsk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_joqhx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4032u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7ad1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4s8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdbq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kipjr")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0d2ky"]
+polygon = PackedVector2Array(-8, 9, 7, 9, 0, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_avrtq"]
+radius = 8.0
+
+[sub_resource type="GDScript" id="GDScript_utwsk"]
+script/source = "extends Timer
+
+
+func _on_timeout() -> void:
+	get_parent().get_parent().receive_damage(ceil(get_parent().get_parent().current_health / 2))
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_joqhx"]
+size = Vector2(30, 25)
+
+[node name="Dino" type="CharacterBody2D"]
+script = ExtResource("1_avrtq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dxem3")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_0d2ky")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_avrtq")
+
+[node name="Particles" parent="." instance=ExtResource("3_v7ad1")]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="CoyoteTime" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashCD" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="LeaveDamageDelay" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+script = SubResource("GDScript_utwsk")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="FallThrough" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 39)
+target_position = Vector2(10, 0)
+hit_from_inside = true
+
+[node name="RightArm" type="Node2D" parent="."]
+script = ExtResource("3_kv0bq")
+
+[node name="Weapon" parent="RightArm" instance=ExtResource("4_0d2ky")]
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="DamageAudioPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_4032u")
+volume_db = -4.77
+
+[node name="Area2D" type="Area2D" parent="."]
+input_pickable = false
+monitorable = false
+script = ExtResource("5_utwsk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_joqhx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area2D"]
+stream = ExtResource("6_joqhx")
+volume_db = 9.0
+
+[connection signal="timeout" from="Timers/LeaveDamageDelay" to="Timers/LeaveDamageDelay" method="_on_timeout"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

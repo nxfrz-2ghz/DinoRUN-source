@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bweqw8vb7r1bu"
+path="res://.godot/imported/17 Marihuana.mp3-f1c337f2af1924a753374f79b8a3db0e.mp3str"
+
+[deps]
+
+source_file="res://res/music/17 Marihuana.mp3"
+dest_files=["res://.godot/imported/17 Marihuana.mp3-f1c337f2af1924a753374f79b8a3db0e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

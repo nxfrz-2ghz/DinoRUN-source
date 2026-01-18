@@ -1,0 +1,74 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://dsu6tcv7vpuxg"]
+
+[ext_resource type="Texture2D" uid="uid://c2gjf46ql18yd" path="res://res/sprites/items/coin/coin.png" id="1_ue8sf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kfud"]
+atlas = ExtResource("1_ue8sf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ydh2"]
+atlas = ExtResource("1_ue8sf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eaw5j"]
+atlas = ExtResource("1_ue8sf")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ob70j"]
+atlas = ExtResource("1_ue8sf")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqptf"]
+atlas = ExtResource("1_ue8sf")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1i6s"]
+atlas = ExtResource("1_ue8sf")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdgkx"]
+atlas = ExtResource("1_ue8sf")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xeq4i"]
+atlas = ExtResource("1_ue8sf")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04pb5"]
+atlas = ExtResource("1_ue8sf")
+region = Rect2(128, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kfud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ydh2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eaw5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ob70j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqptf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1i6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdgkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xeq4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04pb5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn5u4ppmugst6"]
+
+[ext_resource type="Script" uid="uid://bqafdgsa8twuc" path="res://src/main/scripts/pick_up_controller/pick_up_controller.gd" id="1_5geot"]
+
+[node name="PickUPController" type="Node"]
+script = ExtResource("1_5geot")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Sounds"

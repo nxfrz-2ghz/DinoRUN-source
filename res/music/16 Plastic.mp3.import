@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://df0ufcva7rmgm"
+path="res://.godot/imported/16 Plastic.mp3-213175cf4bf296704a0de6289fec0e97.mp3str"
+
+[deps]
+
+source_file="res://res/music/16 Plastic.mp3"
+dest_files=["res://.godot/imported/16 Plastic.mp3-213175cf4bf296704a0de6289fec0e97.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b14078bc16goi"
+path="res://.godot/imported/33 BrD.mp3-cedc0138485bb60358b94c89681183d4.mp3str"
+
+[deps]
+
+source_file="res://res/music/33 BrD.mp3"
+dest_files=["res://.godot/imported/33 BrD.mp3-cedc0138485bb60358b94c89681183d4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b8c5eug1wyn8d"
+path="res://.godot/imported/25 Our darkness.mp3-5cf26278eeda20d24fc5139665783394.mp3str"
+
+[deps]
+
+source_file="res://res/music/25 Our darkness.mp3"
+dest_files=["res://.godot/imported/25 Our darkness.mp3-5cf26278eeda20d24fc5139665783394.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

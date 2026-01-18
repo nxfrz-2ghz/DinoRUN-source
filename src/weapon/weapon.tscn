@@ -1,0 +1,276 @@
+[gd_scene load_steps=29 format=3 uid="uid://bjqulewstgjfk"]
+
+[ext_resource type="Texture2D" uid="uid://bb4kxo8ja2u4b" path="res://res/sprites/guns/4SniperRifle04.png" id="1_ot18a"]
+[ext_resource type="Script" uid="uid://dqonunp8hf0ih" path="res://src/weapon/weapon.gd" id="1_sjqur"]
+[ext_resource type="Texture2D" uid="uid://doq1m7yvg761o" path="res://res/sprites/guns/3Pistol03.png" id="2_xhikx"]
+[ext_resource type="Texture2D" uid="uid://dfyfchjmpsh4d" path="res://res/sprites/guns/2Shotgun02.png" id="3_c7iwc"]
+[ext_resource type="Texture2D" uid="uid://c5t804oouxbf4" path="res://res/sprites/guns/7Assoultrifle07.png" id="4_0fgv3"]
+[ext_resource type="Texture2D" uid="uid://dw46eccwvskih" path="res://res/sprites/guns/4Explosive04.png" id="5_55jiv"]
+[ext_resource type="Texture2D" uid="uid://cbehso4v1xe2b" path="res://res/sprites/guns/5AssaultRifle05.png" id="6_sjqur"]
+[ext_resource type="Texture2D" uid="uid://hdy3turfe02v" path="res://res/sprites/world/circle_05.png" id="8_xor88"]
+[ext_resource type="Texture2D" uid="uid://dsr1a2ixg307g" path="res://res/sprites/guns/Toxic Gun.png" id="8_y322d"]
+[ext_resource type="Texture2D" uid="uid://bdpu7ihgxir2k" path="res://res/sprites/guns/torch/torch_animation.png" id="9_qojts"]
+[ext_resource type="PackedScene" uid="uid://ciqn2labd3uyf" path="res://src/particles/particles.tscn" id="10_3d3jh"]
+[ext_resource type="Texture2D" uid="uid://bhcanjov1p5qb" path="res://res/sprites/particles/fire_particle.png" id="11_ureym"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qojts"]
+a = Vector2(-1.3107138, 11.949474)
+b = Vector2(16.30641, -23.586851)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjoa6"]
+atlas = ExtResource("9_qojts")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbyfb"]
+atlas = ExtResource("9_qojts")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xrqk"]
+atlas = ExtResource("9_qojts")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id7x6"]
+atlas = ExtResource("9_qojts")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uq77r"]
+atlas = ExtResource("9_qojts")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j12l2"]
+atlas = ExtResource("9_qojts")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvqvh"]
+atlas = ExtResource("9_qojts")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lx5s"]
+atlas = ExtResource("9_qojts")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dkfq"]
+atlas = ExtResource("9_qojts")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oa8tv"]
+atlas = ExtResource("9_qojts")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8f5ei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjoa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbyfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xrqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id7x6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uq77r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j12l2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvqvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lx5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dkfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oa8tv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_xor88"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_3d3jh"]
+resource_name = "melee_attack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2720047, 0.56666666, 0.6),
+"transitions": PackedFloat32Array(1, 1, 0.5, 1),
+"update": 0,
+"values": [Vector2(3, -12.48), Vector2(15.15, -0.93), Vector2(24.985, 5.075), Vector2(3, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5676016, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.84648466, 0.8639379797371931, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_sjqur"]
+resource_name = "shoot"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-8.22, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.42760566, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y322d"]
+_data = {
+&"RESET": SubResource("Animation_xor88"),
+&"melee_attack": SubResource("Animation_3d3jh"),
+&"shoot": SubResource("Animation_sjqur")
+}
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_sjqur")
+
+[node name="Sprites" type="Node2D" parent="."]
+position = Vector2(3, 1)
+
+[node name="MeleeHitboxAttack" type="Area2D" parent="Sprites"]
+position = Vector2(-3, -1)
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/MeleeHitboxAttack"]
+shape = SubResource("SegmentShape2D_qojts")
+
+[node name="Pistol" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(3, 1)
+texture = ExtResource("2_xhikx")
+
+[node name="Shotgun" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(7.999999, 1)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("3_c7iwc")
+
+[node name="P90" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(7, -0.9999999)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("6_sjqur")
+
+[node name="M4" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(6, 5.9604645e-08)
+scale = Vector2(0.635, 0.635)
+texture = ExtResource("4_0fgv3")
+
+[node name="RocketLauncher" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(5.999999, -1)
+scale = Vector2(0.605, 0.605)
+texture = ExtResource("5_55jiv")
+
+[node name="SniperRifle" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(4, 0)
+texture = ExtResource("1_ot18a")
+
+[node name="ToxicGun" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(7.97, 0)
+scale = Vector2(0.671, 0.643)
+texture = ExtResource("8_y322d")
+
+[node name="FireTorch" type="AnimatedSprite2D" parent="Sprites"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_8f5ei")
+frame_progress = 0.19193946
+
+[node name="Particles" parent="Sprites/FireTorch" instance=ExtResource("10_3d3jh")]
+position = Vector2(2.075, -4.655)
+amount = 12
+texture = ExtResource("11_ureym")
+one_shot = false
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprites/FireTorch"]
+color = Color(1.1575294, 0.63646865, 0, 1)
+texture = ExtResource("8_xor88")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_y322d")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Sounds"
+
+[node name="Spawner" type="Node2D" parent="."]
+position = Vector2(22, -1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Spawner"]
+position = Vector2(1, 1)
+color = Color(1, 1, 0.4117647, 1)
+energy = 0.0
+texture = ExtResource("8_xor88")
+
+[node name="CDMeleeAttack" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Sprites/MeleeHitboxAttack" to="." method="_on_melee_hitbox_attack_body_entered"]

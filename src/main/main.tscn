@@ -1,0 +1,493 @@
+[gd_scene load_steps=25 format=3 uid="uid://2n4qt10vm7m0"]
+
+[ext_resource type="Script" uid="uid://bgl0eeblg4ins" path="res://src/main/main.gd" id="1_djufw"]
+[ext_resource type="Script" uid="uid://dt5r8ge5kfj4l" path="res://src/main/scripts/scripts.gd" id="2_jkpqq"]
+[ext_resource type="Script" uid="uid://dap580wnq583u" path="res://src/main/scripts/connection_control.gd" id="3_jkpqq"]
+[ext_resource type="Script" uid="uid://dpksdm7tn46hn" path="res://src/main/scripts/settings_control.gd" id="4_jqarl"]
+[ext_resource type="Script" uid="uid://c4mthg57xawfq" path="res://src/main/environment/environment.gd" id="5_jqarl"]
+[ext_resource type="AudioStream" uid="uid://dbyfciuth01e7" path="res://res/sounds/bird.mp3" id="6_frqgp"]
+[ext_resource type="Script" uid="uid://dsjb82nvhqj07" path="res://src/main/camera_2d.gd" id="6_w0wra"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="7_30cu5"]
+[ext_resource type="Texture2D" uid="uid://b2871vhbi5hsl" path="res://res/sprites/buttons/swap_button.png" id="7_frqgp"]
+[ext_resource type="AudioStream" uid="uid://bh0oiyugnsxre" path="res://res/sounds/boss_summon.mp3" id="7_km7bn"]
+[ext_resource type="Script" uid="uid://d14i8wmnx6q8n" path="res://src/main/GUI/control/control.gd" id="9_erw1m"]
+[ext_resource type="Script" uid="uid://bqb3pcdwh2ijo" path="res://src/main/cutscenes/cut_scenes.gd" id="9_hmxxs"]
+[ext_resource type="Script" uid="uid://dybpm6c7gdse7" path="res://src/main/GUI/canvas_layer.gd" id="10_4tqcc"]
+[ext_resource type="Texture2D" uid="uid://bhrusqppf1g4" path="res://res/sprites/world/wall_of_flesh.png" id="10_erw1m"]
+[ext_resource type="PackedScene" uid="uid://ctwwgpfuy3pul" path="res://src/audio_player/audio_player.tscn" id="10_ibsor"]
+[ext_resource type="Script" uid="uid://cuikc43os152h" path="res://src/main/GUI/screen_text/screen_text.gd" id="11_nqfqj"]
+[ext_resource type="PackedScene" uid="uid://dtlrqceftv3g0" path="res://src/ui/way_pbar/way_p_bar.tscn" id="13_6iek0"]
+[ext_resource type="PackedScene" uid="uid://b7ibtnd3036x" path="res://src/ui/hp_bar/hp_bar.tscn" id="14_6iek0"]
+[ext_resource type="FontFile" uid="uid://dti745xfqphoj" path="res://res/fonts/Peaberry-Bold.ttf" id="14_hc2u7"]
+
+[sub_resource type="Animation" id="Animation_frqgp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Environment/Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(320, 180)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutScenes:run_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CutScenes/WallOfFlesh:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-271, 180)]
+}
+
+[sub_resource type="Animation" id="Animation_30cu5"]
+resource_name = "start_game"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Environment/Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 4.9666667, 6),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(320, 180), Vector2(0, 180), Vector2(0, 180), Vector2(320, 180)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutScenes:run_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.9333334, 6),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CutScenes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 1.0666667, 1.4333333, 1.8, 2.2, 2.5, 2.6333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["z"],
+"method": &"add_text_particle"
+}, {
+"args": ["z"],
+"method": &"add_text_particle"
+}, {
+"args": ["z"],
+"method": &"add_text_particle"
+}, {
+"args": ["z"],
+"method": &"add_text_particle"
+}, {
+"args": ["z"],
+"method": &"add_text_particle"
+}, {
+"args": [],
+"method": &"dino_scream"
+}, {
+"args": [],
+"method": &"dino_scream"
+}]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutScenes/AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 4.2383,
+"start_offset": 0.0,
+"stream": ExtResource("6_frqgp")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.55,
+"stream": ExtResource("7_km7bn")
+}],
+"times": PackedFloat32Array(0, 2.1166668)
+}
+tracks/3/use_blend = true
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CanvasLayer/MobileControl")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(5.9333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ready"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CutScenes/WallOfFlesh:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.8, 5.9666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-871, 180), Vector2(-271, 180), Vector2(-130, 180)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Environment/Camera2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.0666666, 2.1666667, 2.2666667, 2.3366668, 2.4066668, 2.4666667, 2.5466666, 2.5866668, 2.6366668, 2.6666667, 2.7066667, 2.7666667, 2.7866666, 2.8266668, 2.8766668, 2.9866667, 3.17, 3.2700002, 3.3666666, 3.5333335, 3.6333337, 3.7333336),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [0.5],
+"method": &"add_trauma"
+}, {
+"args": [0.5],
+"method": &"add_trauma"
+}, {
+"args": [0.5],
+"method": &"add_trauma"
+}, {
+"args": [0.5],
+"method": &"add_trauma"
+}, {
+"args": [0.1],
+"method": &"add_trauma"
+}, {
+"args": [0.1],
+"method": &"add_trauma"
+}, {
+"args": [0.1],
+"method": &"add_trauma"
+}, {
+"args": [1.0],
+"method": &"add_trauma"
+}, {
+"args": [1.0],
+"method": &"add_trauma"
+}, {
+"args": [1.0],
+"method": &"add_trauma"
+}, {
+"args": [1.0],
+"method": &"add_trauma"
+}, {
+"args": [1.0],
+"method": &"add_trauma"
+}, {
+"args": [1.0],
+"method": &"add_trauma"
+}, {
+"args": [1.0],
+"method": &"add_trauma"
+}, {
+"args": [1.0],
+"method": &"add_trauma"
+}, {
+"args": [3.0],
+"method": &"add_trauma"
+}, {
+"args": [0.1],
+"method": &"add_trauma"
+}, {
+"args": [0.1],
+"method": &"add_trauma"
+}, {
+"args": [0.1],
+"method": &"add_trauma"
+}, {
+"args": [0.5],
+"method": &"add_trauma"
+}, {
+"args": [0.5],
+"method": &"add_trauma"
+}, {
+"args": [0.5],
+"method": &"add_trauma"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_frqgp"]
+_data = {
+&"RESET": SubResource("Animation_frqgp"),
+&"start_game": SubResource("Animation_30cu5")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_30cu5"]
+radius = 177.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4tqcc"]
+radius = 300.0
+
+[node name="Main" type="Node"]
+script = ExtResource("1_djufw")
+
+[node name="Scripts" type="Node" parent="."]
+script = ExtResource("2_jkpqq")
+
+[node name="ConnectionControl" type="Node" parent="Scripts"]
+script = ExtResource("3_jkpqq")
+
+[node name="SettingsControl" type="Node" parent="Scripts"]
+script = ExtResource("4_jqarl")
+
+[node name="Environment" type="Node2D" parent="."]
+script = ExtResource("5_jqarl")
+
+[node name="Camera2D" type="Camera2D" parent="Environment"]
+position = Vector2(320, 180)
+position_smoothing_enabled = true
+script = ExtResource("6_w0wra")
+
+[node name="CutScenes" type="Node" parent="."]
+
+[node name="CutScenes" type="AnimationPlayer" parent="CutScenes"]
+libraries = {
+&"": SubResource("AnimationLibrary_frqgp")
+}
+script = ExtResource("9_hmxxs")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CutScenes/CutScenes"]
+bus = &"Sounds"
+
+[node name="WallOfFlesh" type="Sprite2D" parent="CutScenes/CutScenes"]
+position = Vector2(-271, 180)
+texture = ExtResource("10_erw1m")
+flip_h = true
+
+[node name="WallOfFlesh2" type="Sprite2D" parent="CutScenes/CutScenes/WallOfFlesh"]
+position = Vector2(0, 318.005)
+texture = ExtResource("10_erw1m")
+flip_h = true
+
+[node name="WallOfFlesh3" type="Sprite2D" parent="CutScenes/CutScenes/WallOfFlesh"]
+position = Vector2(0, -318.005)
+texture = ExtResource("10_erw1m")
+flip_h = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("10_4tqcc")
+
+[node name="HUD" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 394.0
+offset_bottom = 100.0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD"]
+layout_mode = 2
+
+[node name="AudioPlayer" parent="CanvasLayer/HUD/HBoxContainer" instance=ExtResource("10_ibsor")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="WayPBar" parent="CanvasLayer/HUD/HBoxContainer/VBoxContainer" instance=ExtResource("13_6iek0")]
+layout_mode = 2
+
+[node name="HPBar" parent="CanvasLayer/HUD/HBoxContainer/VBoxContainer" instance=ExtResource("14_6iek0")]
+layout_mode = 2
+
+[node name="ScreenText" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -20.5
+offset_right = 19.5
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_nqfqj")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ScreenText"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -13.0
+offset_right = 119.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("14_hc2u7")
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="CanvasLayer/ScreenText"]
+one_shot = true
+
+[node name="MobileControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_erw1m")
+
+[node name="TextClear" type="Timer" parent="CanvasLayer/MobileControl"]
+wait_time = 3.0
+one_shot = true
+
+[node name="LeftJoystick" parent="CanvasLayer/MobileControl" instance=ExtResource("7_30cu5")]
+visible = false
+layout_mode = 1
+offset_left = 50.0
+offset_top = -149.365
+offset_right = 350.0
+offset_bottom = 150.63501
+scale = Vector2(0.5, 0.5)
+joystick_mode = 1
+
+[node name="RightJoystick" parent="CanvasLayer/MobileControl" instance=ExtResource("7_30cu5")]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -204.0
+offset_top = -149.0
+offset_right = 96.0022
+offset_bottom = 151.0
+grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
+joystick_mode = 1
+use_input_actions = false
+
+[node name="SwapButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl/RightJoystick"]
+position = Vector2(-70, 45)
+scale = Vector2(0.265, 0.265)
+texture_normal = ExtResource("7_frqgp")
+shape = SubResource("CircleShape2D_30cu5")
+action = "swap_button_click"
+
+[node name="SuperButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl/RightJoystick"]
+position = Vector2(-25, 206.73)
+scale = Vector2(0.14044999, 0.14044999)
+shape = SubResource("CircleShape2D_4tqcc")
+action = "pickup"
+
+[node name="Label" type="Label" parent="CanvasLayer/MobileControl/RightJoystick/SuperButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.31885
+offset_top = -190.31665
+offset_right = 242.0791
+offset_bottom = 236.88159
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("14_hc2u7")
+theme_override_font_sizes/font_size = 196
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="LDashButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl/RightJoystick"]
+position = Vector2(85, -10)
+scale = Vector2(0.14044999, 0.14044999)
+shape = SubResource("CircleShape2D_4tqcc")
+action = "l_dash"
+
+[node name="Label" type="Label" parent="CanvasLayer/MobileControl/RightJoystick/LDashButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.31885
+offset_top = -190.31665
+offset_right = 242.0791
+offset_bottom = 236.88159
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("14_hc2u7")
+theme_override_font_sizes/font_size = 144
+text = "<DASH"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="RDashButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl/RightJoystick"]
+position = Vector2(215, -10)
+scale = Vector2(0.14044999, 0.14044999)
+shape = SubResource("CircleShape2D_4tqcc")
+action = "r_dash"
+
+[node name="Label" type="Label" parent="CanvasLayer/MobileControl/RightJoystick/RDashButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.31885
+offset_top = -190.31665
+offset_right = 242.0791
+offset_bottom = 236.88159
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("14_hc2u7")
+theme_override_font_sizes/font_size = 144
+text = "DASH>"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="SwitchMusicButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl"]
+position = Vector2(57, 38.999996)
+scale = Vector2(0.265, 0.265)
+shape = SubResource("CircleShape2D_30cu5")
+action = "ui_accept"
+
+[connection signal="animation_finished" from="CutScenes/CutScenes" to="CutScenes/CutScenes" method="_on_animation_finished"]
+[connection signal="timeout" from="CanvasLayer/ScreenText/Timer" to="CanvasLayer/ScreenText" method="_on_timer_timeout"]
+[connection signal="timeout" from="CanvasLayer/MobileControl/TextClear" to="CanvasLayer/MobileControl" method="_on_text_clear_timeout"]

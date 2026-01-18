@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dq2681when822"
+path="res://.godot/imported/36 Mr. Spock's cryo-bed.mp3-f75cc92962abf2b220d60196c332658b.mp3str"
+
+[deps]
+
+source_file="res://res/music/36 Mr. Spock's cryo-bed.mp3"
+dest_files=["res://.godot/imported/36 Mr. Spock's cryo-bed.mp3-f75cc92962abf2b220d60196c332658b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
