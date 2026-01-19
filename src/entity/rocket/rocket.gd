@@ -11,8 +11,13 @@ const explosion := preload("res://src/entity/explosion/explosion.tscn")
 var velocity := Vector2.ZERO
 
 
+func _integrate_forces(state) -> void:
+	var trans = state.transform
+	trans.origin.x -= M.E.ground.speed * Engine.time_scale
+	state.transform = trans
+
+
 func _physics_process(delta: float) -> void:
-	self.position.x += M.E.ground.speed * Engine.time_scale
 	
 	# Ускорение в направлении, куда направлен узел
 	var direction := Vector2(cos(rotation), sin(rotation))
@@ -37,6 +42,7 @@ func _physics_process(delta: float) -> void:
 
 
 func boom() -> void:
+	M.E.camera.add_trauma(damage)
 	var inst: Area2D = explosion.instantiate()
 	M.E.add_child(inst)
 	inst.global_position = self.global_position

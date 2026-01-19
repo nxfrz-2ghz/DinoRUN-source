@@ -5,7 +5,6 @@ extends Node2D
 @onready var audio_player := $AudioStreamPlayer
 @onready var anim_player := $AnimationPlayer
 @onready var spawner := $Spawner
-@onready var melee_attack_cooldown := $CDMeleeAttack
 
 
 @onready var weapons_textures := {
@@ -95,9 +94,8 @@ const weapons := {
 		"bullet_texture": preload("res://res/sprites/entity/poison_bullet/poison_bullet.png"),
 	},
 	"fire_torch": {
-		"cooldown": 0.5,
 		"damage": 1.2,
-		"speed": 1,
+		"speed": 0.6,
 		"sound": null,
 		"effects":
 		{
@@ -110,7 +108,6 @@ const weapons := {
 		},
 	},
 	"base_sword": {
-		"cooldown": 0.2,
 		"damage": 1.2,
 		"speed": 1,
 		"sound": null,
@@ -211,7 +208,7 @@ func shoot() -> void:
 		audio_player.play()
 	
 	else: # WEAPON IS MELEE
-		if melee_attack_cooldown.is_stopped():
+		if anim_player.current_animation != "melee_attack":
 			anim_player.play("melee_attack")
 
 
@@ -220,13 +217,11 @@ func _on_melee_hitbox_attack_body_entered(body: Node2D) -> void: # OM MELEE ATTA
 		var weapon: String = inventory[1]["name"]
 		if body.has_method("receive_damage") and weapons[weapon].get("damage"):
 			body.receive_damage(weapons[weapon]["damage"])
-			melee_attack_cooldown.wait_time = weapons[weapon]["cooldown"]
-			melee_attack_cooldown.start()
+			$Sprites/MeleeHitboxAttack/CollisionShape2D.disabled = true
 			anim_player.play("RESET")
 		if body.has_method("receive_effects") and weapons[weapon].get("effects"):
 			body.receive_effects(weapons[weapon]["effects"])
-			melee_attack_cooldown.wait_time = weapons[weapon]["cooldown"]
-			melee_attack_cooldown.start()
+			$Sprites/MeleeHitboxAttack/CollisionShape2D.disabled = true
 			anim_player.play("RESET")
 
 

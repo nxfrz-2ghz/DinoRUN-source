@@ -1,7 +1,7 @@
 extends Area2D
 
-@export var damage: float = 25.0
-@export var falloff_factor = 0.7
+@export var damage: float = 30.0
+@export var falloff_factor = 0.5
 @export var force: float = 5000.0
 
 

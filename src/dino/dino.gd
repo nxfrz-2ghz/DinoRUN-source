@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var dash_cooldown := $Timers/DashCD
 @onready var leave_damage_delay := $Timers/LeaveDamageDelay
 @onready var anim_sprite := $AnimatedSprite2D
-@onready var collision := $CollisionShape2D
+@onready var collider := $CollisionShape2D
 @onready var particles := $Particles
 @onready var damage_audio_player := $Audio/DamageAudioPlayer
 
@@ -199,8 +199,8 @@ func _physics_process(delta: float) -> void:
 	
 	jump_buffer_timer = max(jump_buffer_timer - delta, 0.0) # Уменьшение jump_buffer_timer
 	
-	if collision.disabled == true and velocity.y > 0:
-		collision.disabled = false
+	if collider.disabled == true and velocity.y > 0:
+		collider.disabled = false
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -214,7 +214,7 @@ func _physics_process(delta: float) -> void:
 		# При спускании с платформы на один кадр отключается коллизия
 		if Input.is_action_just_pressed("ui_down") and !$Raycasts/FallThrough.is_colliding():
 			if !alive: return
-			collision.disabled = true
+			collider.disabled = true
 			velocity.y = 1200
 	
 	if alive: 
@@ -234,7 +234,7 @@ func _physics_process(delta: float) -> void:
 	# В нем отключается коллизия, чтобы можно было запрыгнуть на платформу
 	if jump_buffer_timer > 0.0 and (is_on_floor() or !coyote_time.is_stopped()): 
 		velocity.y = JUMP_VELOCITY
-		collision.disabled = true
+		collider.disabled = true
 	
 	_moving()
 	_braking()

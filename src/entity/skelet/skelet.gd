@@ -19,8 +19,15 @@ func moving() -> void:
 		
 		velocity.x += speed * ((int(!rotated)*2)-1)
 		
-		if raycast.is_colliding() and jump_delay.is_stopped():
-			jump_delay.start()
+		if jump_delay.is_stopped():
+			
+			if raycast.is_colliding():
+				jump_delay.start()
+			
+			# Прыжок, если игрок над мобом
+			if abs(M.E.dino.position.x - self.position.x) < 50 and M.E.dino.position.y - self.position.y < 50:
+				velocity.y = jump_velocity
+				collider.disabled = true
 
 
 func braking() -> void:
@@ -59,6 +66,9 @@ func _physics_process(delta: float) -> void:
 	if !alive: return
 	
 	self.position.x -= M.E.ground.speed * Engine.time_scale
+	
+	if collider.disabled == true and velocity.y > 0:
+		collider.disabled = false
 	
 	if is_on_floor():
 		moving()
