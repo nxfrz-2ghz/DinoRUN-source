@@ -2,7 +2,7 @@ extends "res://src/weapon/weapon.gd"
 
 
 func _ready() -> void:
-	add_item("rocket_launcher")
+	add_item("pistol")
 	add_item("base_sword")
 
 
