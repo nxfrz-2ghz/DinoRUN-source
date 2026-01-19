@@ -37,9 +37,8 @@ height = 28.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dmu2g"]
 polygon = PackedVector2Array(-10, 21, 11, 21, 0, 19)
 
-[node name="SmallCactus" instance=ExtResource("1_lb5x8")]
+[node name="SmallCactus" groups=["mobs"] instance=ExtResource("1_lb5x8")]
 script = ExtResource("2_31bs7")
-jump_velocity = -250.0
 max_health = 3.0
 damage = 1.2
 

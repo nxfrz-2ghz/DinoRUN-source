@@ -33,7 +33,7 @@ height = 40.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dmu2g"]
 polygon = PackedVector2Array(-10, 21, 11, 21, 0, 19)
 
-[node name="BigCactus" instance=ExtResource("1_abpto")]
+[node name="BigCactus" groups=["mobs"] instance=ExtResource("1_abpto")]
 script = ExtResource("2_abpto")
 jump_velocity = -250.0
 damage = 1.5

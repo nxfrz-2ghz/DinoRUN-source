@@ -51,8 +51,9 @@ func _physics_process(_delta: float) -> void:
 	if item in weapons_names:
 		if self.global_position.distance_to(M.E.dino.global_position) < 70:
 			if label.text == "":
-				var text := item
-				text += "\ndmg: " + str(M.E.dino.get_node_or_null("RightArm/Weapon").WEAPONS[item]["damage"])
+				var text := "[PRESS 'C' TO PICKUP]\n"
+				text += item
+				text += "\ndmg: " + str(M.E.dino.get_node_or_null("RightArm/Weapon").weapons[item]["damage"])
 				text += "\nlvl: " + str(lvl)
 				label.text = text
 		else:

@@ -28,15 +28,6 @@ const GAME_MUSIC := [
 	"res://res/music/39 Blank page.mp3",
 ]
 
-const CHILL_MUSIC := [
-	"res://res/music/01 Sore point.mp3",
-	"res://res/music/22 Sleepy sunflower.mp3",
-	"res://res/music/37 Simpukka chilli.mp3",
-	"res://res/music/38 So close.mp3",
-	"res://res/music/40 Cherish.mp3",
-	"res://res/music/05 A piece for freedom.mp3",
-]
-
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_accept"):

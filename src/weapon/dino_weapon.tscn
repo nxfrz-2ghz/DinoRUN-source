@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjqulewstgjfk"]
+
+[ext_resource type="PackedScene" uid="uid://chkqses5y7s7g" path="res://src/weapon/weapon.tscn" id="1_eedps"]
+[ext_resource type="Script" uid="uid://cgcydrbfydnb5" path="res://src/weapon/dino_weapon.gd" id="1_qojts"]
+
+[node name="Weapon" instance=ExtResource("1_eedps")]
+script = ExtResource("1_qojts")

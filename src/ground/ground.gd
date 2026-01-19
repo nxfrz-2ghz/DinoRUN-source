@@ -16,7 +16,7 @@ const locations := [
 	"forest",
 	"desert",
 	"iceland",
-	"THE NETHER",
+	"nether",
 ]
 
 const tiles := {
@@ -117,6 +117,10 @@ func _set_location_to_blayers() -> void:
 	blayer_2.get_node_or_null("Sprite2D").texture = bg_sprites[2][loc_name]
 
 
+func _print_location_name() -> void:
+	M.C.screen_text.add_message("THE " + locations[location].to_upper())
+
+
 func move_tile(tile: TileMapLayer) -> void:
 	tile.position.x -= speed * Engine.time_scale
 	
@@ -134,7 +138,7 @@ func move_tile(tile: TileMapLayer) -> void:
 			distance = 0
 			location += 1
 			speed -= 0.8
-			_set_location_to_blayers() 
+			$AnimationPlayer.play("change_location")
 
 
 func gen_location_tile(loc: int, tile: TileMapLayer) -> void:

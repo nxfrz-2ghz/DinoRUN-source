@@ -32,4 +32,5 @@ func add_text_particle(text: String) -> Node2D:
 func _on_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "start_game":
 		M.E.dino.alive = true
+		M.C.player.get_node_or_null("AudioStreamPlayer").play_music()
 		M.C.screen_text.add_message("RUN!")

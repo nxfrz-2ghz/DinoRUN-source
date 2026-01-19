@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://vq8jqr3yc13u"]
+
+[ext_resource type="PackedScene" uid="uid://chkqses5y7s7g" path="res://src/weapon/weapon.tscn" id="1_r3b46"]
+[ext_resource type="Script" uid="uid://biaxhe7kuu5qn" path="res://src/weapon/mob_weapon.gd" id="2_r3b46"]
+
+[node name="Weapon" instance=ExtResource("1_r3b46")]
+script = ExtResource("2_r3b46")
+strategy = 0
+gun = ""
+lvl = 0

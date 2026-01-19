@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bjqulewstgjfk"]
+[gd_scene load_steps=19 format=3 uid="uid://chkqses5y7s7g"]
 
 [ext_resource type="Texture2D" uid="uid://bb4kxo8ja2u4b" path="res://res/sprites/guns/4SniperRifle04.png" id="1_ot18a"]
 [ext_resource type="Script" uid="uid://dqonunp8hf0ih" path="res://src/weapon/weapon.gd" id="1_sjqur"]
@@ -9,91 +9,14 @@
 [ext_resource type="Texture2D" uid="uid://cbehso4v1xe2b" path="res://res/sprites/guns/5AssaultRifle05.png" id="6_sjqur"]
 [ext_resource type="Texture2D" uid="uid://hdy3turfe02v" path="res://res/sprites/world/circle_05.png" id="8_xor88"]
 [ext_resource type="Texture2D" uid="uid://dsr1a2ixg307g" path="res://res/sprites/guns/Toxic Gun.png" id="8_y322d"]
-[ext_resource type="Texture2D" uid="uid://bdpu7ihgxir2k" path="res://res/sprites/guns/torch/torch_animation.png" id="9_qojts"]
+[ext_resource type="SpriteFrames" uid="uid://chwpqk5udcvop" path="res://res/sprites/guns/torch/fire_torch_frames.tres" id="9_qojts"]
 [ext_resource type="PackedScene" uid="uid://ciqn2labd3uyf" path="res://src/particles/particles.tscn" id="10_3d3jh"]
 [ext_resource type="Texture2D" uid="uid://bhcanjov1p5qb" path="res://res/sprites/particles/fire_particle.png" id="11_ureym"]
+[ext_resource type="Texture2D" uid="uid://djs338u3qg217" path="res://res/sprites/guns/base_sword.png" id="13_3d3jh"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qojts"]
 a = Vector2(-1.3107138, 11.949474)
-b = Vector2(16.30641, -23.586851)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wjoa6"]
-atlas = ExtResource("9_qojts")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mbyfb"]
-atlas = ExtResource("9_qojts")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2xrqk"]
-atlas = ExtResource("9_qojts")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_id7x6"]
-atlas = ExtResource("9_qojts")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uq77r"]
-atlas = ExtResource("9_qojts")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j12l2"]
-atlas = ExtResource("9_qojts")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dvqvh"]
-atlas = ExtResource("9_qojts")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3lx5s"]
-atlas = ExtResource("9_qojts")
-region = Rect2(32, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5dkfq"]
-atlas = ExtResource("9_qojts")
-region = Rect2(48, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oa8tv"]
-atlas = ExtResource("9_qojts")
-region = Rect2(64, 16, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_8f5ei"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wjoa6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mbyfb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2xrqk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_id7x6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uq77r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j12l2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dvqvh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3lx5s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5dkfq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oa8tv")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+b = Vector2(19, -28)
 
 [sub_resource type="Animation" id="Animation_xor88"]
 length = 0.001
@@ -240,7 +163,7 @@ texture = ExtResource("8_y322d")
 
 [node name="FireTorch" type="AnimatedSprite2D" parent="Sprites"]
 visible = false
-sprite_frames = SubResource("SpriteFrames_8f5ei")
+sprite_frames = ExtResource("9_qojts")
 frame_progress = 0.19193946
 
 [node name="Particles" parent="Sprites/FireTorch" instance=ExtResource("10_3d3jh")]
@@ -252,6 +175,12 @@ one_shot = false
 [node name="PointLight2D" type="PointLight2D" parent="Sprites/FireTorch"]
 color = Color(1.1575294, 0.63646865, 0, 1)
 texture = ExtResource("8_xor88")
+
+[node name="BaseSword" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(2.5, -2)
+scale = Vector2(1.3125, 1.25)
+texture = ExtResource("13_3d3jh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

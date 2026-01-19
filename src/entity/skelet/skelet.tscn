@@ -262,7 +262,7 @@ height = 25.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lgjo0"]
 polygon = PackedVector2Array(4, 13, 0, 12, -4, 13)
 
-[node name="Mob" instance=ExtResource("1_lgjo0")]
+[node name="Mob" groups=["mobs"] instance=ExtResource("1_lgjo0")]
 script = ExtResource("2_pvfm3")
 speed = 70.0
 jump_velocity = -350.0

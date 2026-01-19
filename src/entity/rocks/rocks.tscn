@@ -1,0 +1,56 @@
+[gd_scene load_steps=12 format=3 uid="uid://cpnixkbl1o48q"]
+
+[ext_resource type="PackedScene" uid="uid://dsr0i1ygm5cch" path="res://src/entity/mob/mob.tscn" id="1_gqpxc"]
+[ext_resource type="Texture2D" uid="uid://sg28ro801cgl" path="res://res/sprites/entity/rocks/rocks1.png" id="2_bgpdy"]
+[ext_resource type="Script" uid="uid://cbhg4vbem77t0" path="res://src/entity/rocks/rocks.gd" id="2_rlq6e"]
+[ext_resource type="Texture2D" uid="uid://bx68qmnb3ac8m" path="res://res/sprites/entity/rocks/rocks2.png" id="3_rlq6e"]
+[ext_resource type="Texture2D" uid="uid://k2imb1ddpm45" path="res://res/sprites/entity/rocks/rocks3.png" id="4_qc04e"]
+[ext_resource type="Texture2D" uid="uid://dx6ea3fkbf1yy" path="res://res/sprites/entity/rocks/rocks4.png" id="5_ab0b7"]
+[ext_resource type="Texture2D" uid="uid://brphlk4u8h5b2" path="res://res/sprites/entity/rocks/rocks5.png" id="6_185ph"]
+[ext_resource type="Texture2D" uid="uid://c21r2pxc5y8i0" path="res://res/sprites/entity/rocks/rocks6.png" id="7_b0nq4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3r0h6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bgpdy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rlq6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qc04e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ab0b7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_185ph")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_b0nq4")
+}],
+"loop": false,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bgpdy"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rlq6e"]
+polygon = PackedVector2Array(-5, 7, -2, 6, 4, 7)
+
+[node name="Rocks" instance=ExtResource("1_gqpxc")]
+script = ExtResource("2_rlq6e")
+jump_velocity = -250.0
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_3r0h6")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-1, 6)
+shape = SubResource("CircleShape2D_bgpdy")
+
+[node name="LightOccluder2D" parent="." index="2"]
+occluder = SubResource("OccluderPolygon2D_rlq6e")

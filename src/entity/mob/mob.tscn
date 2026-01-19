@@ -10,7 +10,7 @@ bg_color = Color(0.6, 0.49019608, 0.49803922, 0.7294118)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybgsk"]
 bg_color = Color(1, 0, 0, 1)
 
-[node name="Mob" type="CharacterBody2D"]
+[node name="Mob" type="CharacterBody2D" groups=["mobs"]]
 script = ExtResource("1_xcy7r")
 jump_velocity = 0.0
 

@@ -41,6 +41,14 @@ const items := {
 		"weapon": true,
 		"texture": preload("res://res/sprites/guns/Toxic Gun.png"),
 	},
+	"fire_torch": {
+		"weapon": true,
+		"frames": preload("res://res/sprites/guns/torch/fire_torch_frames.tres"),
+	},
+	"base_sword": {
+		"weapon": true,
+		"texture": preload("res://res/sprites/guns/base_sword.png"),
+	},
 }
 
 var i: int = 0
@@ -67,7 +75,7 @@ func spawn(world_seed: int, pos_x: int, location: int, distance: int) -> void:
 			current_item = "coin"
 	
 	item.item = current_item
-	item.lvl = location + floor(randf_range(0, 10) / 10)
+	item.lvl = location + int(randi_range(0, 10) == 10)
 	
 	if items[current_item].get("texture"):
 		item.texture = items[current_item]["texture"]

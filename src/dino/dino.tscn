@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b4rjkh0fiqj2j" path="res://src/dino/dino.gd" id="1_avrtq"]
 [ext_resource type="Script" uid="uid://b8e1xc0qs4tpl" path="res://src/dino/right_arm.gd" id="3_kv0bq"]
 [ext_resource type="PackedScene" uid="uid://ciqn2labd3uyf" path="res://src/particles/particles.tscn" id="3_v7ad1"]
-[ext_resource type="PackedScene" uid="uid://bjqulewstgjfk" path="res://src/weapon/weapon.tscn" id="4_0d2ky"]
+[ext_resource type="PackedScene" uid="uid://bjqulewstgjfk" path="res://src/weapon/dino_weapon.tscn" id="4_0d2ky"]
 [ext_resource type="AudioStream" uid="uid://clpolv4smjbax" path="res://res/sounds/damage/damage.mp3" id="5_4032u"]
 [ext_resource type="Script" uid="uid://gbtabcfqvu0m" path="res://src/dino/area_2d.gd" id="5_utwsk"]
 [ext_resource type="AudioStream" uid="uid://dlsv4vkj7j0c2" path="res://res/sounds/attacks/bonk.mp3" id="6_joqhx"]

@@ -7,7 +7,8 @@ extends Node2D
 @onready var spawner := $Spawner
 @onready var melee_attack_cooldown := $CDMeleeAttack
 
-@onready var weapons := {
+
+@onready var weapons_textures := {
 	"pistol" : $Sprites/Pistol,
 	"shotgun" : $Sprites/Shotgun,
 	"P90" : $Sprites/P90,
@@ -16,13 +17,13 @@ extends Node2D
 	"sniper_rifle" : $Sprites/SniperRifle,
 	"toxic_gun" : $Sprites/ToxicGun,
 	"fire_torch" : $Sprites/FireTorch,
+	"base_sword" : $Sprites/BaseSword,
 }
-
 
 
 const BULLET := preload("res://src/entity/bullet/bullet.tscn")
 
-const WEAPONS := {
+const weapons := {
 	"pistol": {
 		"damage": 0.4,
 		"power": 1000,
@@ -58,16 +59,16 @@ const WEAPONS := {
 		"quiet": false,
 	},
 	"rocket_launcher": {
-		"damage": 5,
-		"power": 500,
-		"speed": 0.2,
-		"spread_deg": 1.0,
-		"sound": preload("res://res/sounds/weapons/gun/gun shot.mp3"),
-		"quiet": true,
+		"damage": 2.0,
+		"power": 100,
+		"speed": 0.5,
+		"sound": preload("res://res/sounds/weapons/rocket_launcher/rl_launch.mp3"),
+		"quiet": false,
 		"knockback": 100,
+		"custom_bullet": preload("res://src/entity/rocket/rocket.tscn"),
 	},
 	"sniper_rifle": {
-		"damage": 5,
+		"damage": 5.0,
 		"power": 1200,
 		"speed": 0.5,
 		"spread_deg": 0.2,
@@ -91,7 +92,7 @@ const WEAPONS := {
 			},
 		},
 		"despawn_delay": 20.0,
-		"bullet_texture": preload("res://res/sprites/entity/poison_bullet/bullet.png")
+		"bullet_texture": preload("res://res/sprites/entity/poison_bullet/poison_bullet.png"),
 	},
 	"fire_torch": {
 		"cooldown": 0.5,
@@ -107,6 +108,12 @@ const WEAPONS := {
 				"time": 3.0,
 			},
 		},
+	},
+	"base_sword": {
+		"cooldown": 0.2,
+		"damage": 1.2,
+		"speed": 1,
+		"sound": null,
 	},
 	"": {
 		"speed": 0.0,
@@ -124,16 +131,8 @@ var inventory := {
 		"name": "",
 		"lvl": 0,
 	},
-} 
+}
 
-
-var rng := RandomNumberGenerator.new()
-
-
-func _ready() -> void:
-	rng.randomize()
-	add_item("pistol")
-	add_item("fire_torch")
 
 
 func add_item(item_name: String, lvl: int = 0) -> void:
@@ -169,46 +168,20 @@ func drop_item() -> void:
 	update_item()
 
 
-func swap_items() -> void:
-	
-	if anim_player.is_playing(): return
-	
-	var buffer: Dictionary = inventory[1]
-	inventory[1] = inventory[2]
-	inventory[2] = buffer
-	update_item()
-
-
 func update_item() -> void:
-	for w in weapons.values():
+	for w in weapons_textures.values():
 		w.hide()
-		weapons["fire_torch"].get_node_or_null("Particles").emitting = true
-
+		weapons_textures["fire_torch"].get_node_or_null("Particles").emitting = false
+	
 	var current_weapon: String = inventory[1]["name"]
-	if current_weapon != "" and current_weapon in weapons:
-		weapons[current_weapon].show()
+	if current_weapon != "" and current_weapon in weapons_textures:
+		weapons_textures[current_weapon].show()
 		if current_weapon == "fire_torch":
-			weapons["fire_torch"].get_node_or_null("Particles").emitting = true
-	var info = WEAPONS.get(current_weapon, WEAPONS[""] )
-	audio_player.stream = info.get("sound", WEAPONS[""].get("sound"))
+			weapons_textures["fire_torch"].get_node_or_null("Particles").emitting = true
+	
+	var info = weapons.get(current_weapon, weapons[""] )
+	audio_player.stream = info.get("sound", weapons[""].get("sound"))
 	anim_player.speed_scale = info.get("speed", 0)
-	
-	
-	# GRAPHICAL INVENTORY UPDATER
-	#var slot := [
-	#	M.C.inv.get_node_or_null("MarginContainer/HBoxContainer/VBoxContainer/MainGun"),
-	#	M.C.inv.get_node_or_null("MarginContainer/HBoxContainer/VBoxContainer/SecondGun"),
-	#]
-	#
-	#if weapons.has(inventory[1]["name"]): slot[0].texture = weapons[inventory[1]["name"]].texture
-	#else: slot[0].texture = null
-	#if weapons.has(inventory[2]["name"]): slot[1].texture = weapons[inventory[2]["name"]].texture
-	#else: slot[1].texture = null
-	#
-	#var text: String = current_weapon
-	#text += "\ndmg: " + str(current_damage)
-	#text += "\nlvl: " + str(inventory[1]["lvl"])
-	#M.C.inv.get_node_or_null("MarginContainer/HBoxContainer/RichTextLabel").text = text
 
 
 func lvl_multiplier(num: float) -> float:
@@ -216,20 +189,19 @@ func lvl_multiplier(num: float) -> float:
 
 
 func shoot() -> void:
-	if !M.E.dino.alive: return
 	var weapon: String = inventory[1]["name"]
 	
-	if WEAPONS[weapon].get("power"): # WEAPON IS GUN
+	if weapons[weapon].get("power"): # WEAPON IS GUN
 		if anim_player.current_animation == "shoot": return
 		
 		if weapon == "shotgun":
-			for i in range(WEAPONS["shotgun"].get("bullets")):
+			for i in range(weapons["shotgun"].get("bullets")):
 				spawn_bullet(weapon)
 		else:
 			spawn_bullet(weapon)
 		
-		if WEAPONS[weapon].get("knockback"):
-			var knockback: int = WEAPONS[weapon]["knockback"]
+		if weapons[weapon].get("knockback"):
+			var knockback: int = weapons[weapon]["knockback"]
 			knockback += floor(lvl_multiplier(knockback))
 			M.E.dino.velocity += Vector2.RIGHT.rotated(self.global_rotation) * -knockback
 		
@@ -245,49 +217,44 @@ func shoot() -> void:
 
 func _on_melee_hitbox_attack_body_entered(body: Node2D) -> void: # OM MELEE ATTACK
 	if anim_player.current_animation == "melee_attack":
-		if body.name == "Dino": return
 		var weapon: String = inventory[1]["name"]
-		if body.has_method("receive_damage") and WEAPONS[weapon].get("damage"):
-			body.receive_damage(WEAPONS[weapon]["damage"])
-			melee_attack_cooldown.wait_time = WEAPONS[weapon]["cooldown"]
+		if body.has_method("receive_damage") and weapons[weapon].get("damage"):
+			body.receive_damage(weapons[weapon]["damage"])
+			melee_attack_cooldown.wait_time = weapons[weapon]["cooldown"]
 			melee_attack_cooldown.start()
 			anim_player.play("RESET")
-		if body.has_method("receive_effects") and WEAPONS[weapon].get("effects"):
-			body.receive_effects(WEAPONS[weapon]["effects"])
-			melee_attack_cooldown.wait_time = WEAPONS[weapon]["cooldown"]
+		if body.has_method("receive_effects") and weapons[weapon].get("effects"):
+			body.receive_effects(weapons[weapon]["effects"])
+			melee_attack_cooldown.wait_time = weapons[weapon]["cooldown"]
 			melee_attack_cooldown.start()
 			anim_player.play("RESET")
 
 
 func spawn_bullet(gun: String) -> void:
 	
-	# Тряска Камеры и Вспышка
-	if !WEAPONS[gun]["quiet"]:
-		M.E.camera.add_trauma(WEAPONS[gun]["damage"])
-		$Spawner/PointLight2D.energy += float(WEAPONS[gun]["power"]) / 1000 - $Spawner/PointLight2D.energy / 2
-	
 	# Спавн пули
+	if weapons[gun].get("custom_bullet"):
+		var bullet: RigidBody2D = weapons[gun]["custom_bullet"].instantiate()
+		M.E.add_child(bullet)
+		bullet.position = spawner.global_position
+		bullet.rotation = spawner.global_rotation
+		bullet.apply_impulse(Vector2.RIGHT.rotated(bullet.rotation) * weapons[gun]["power"])
+		bullet.damage = weapons[gun]["damage"] + lvl_multiplier(weapons[gun]["damage"])
+		return
+	
 	var bullet: RigidBody2D = BULLET.instantiate()
 	M.E.add_child(bullet)
 	bullet.position = spawner.global_position
 	
-	var spread := deg_to_rad(WEAPONS[gun]["spread_deg"])
-	bullet.rotation = spawner.global_rotation + rng.randf_range(-spread * 0.5, spread * 0.5)
+	var spread := deg_to_rad(weapons[gun]["spread_deg"])
+	bullet.rotation = spawner.global_rotation + randf_range(-spread * 0.5, spread * 0.5)
 	bullet.screen_speed = -M.E.ground.speed
-	bullet.apply_impulse(Vector2.RIGHT.rotated(bullet.rotation) * WEAPONS[gun]["power"])
-	bullet.damage = WEAPONS[gun]["damage"] + lvl_multiplier(WEAPONS[gun]["damage"])
+	bullet.apply_impulse(Vector2.RIGHT.rotated(bullet.rotation) * weapons[gun]["power"])
+	bullet.damage = weapons[gun]["damage"] + lvl_multiplier(weapons[gun]["damage"])
 	
-	if WEAPONS[gun].get("despawn_delay"):
-		bullet.despawn_delay = WEAPONS[gun]["despawn_delay"]
-	if WEAPONS[gun].get("effects"):
-		bullet.effects = WEAPONS[gun]["effects"]
-	if WEAPONS[gun].get("bullet_texture"):
-		bullet.get_node_or_null("Sprite2D").texture = WEAPONS[gun]["bullet_texture"]
-
-
-func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("swap_button_click"):
-		swap_items()
-	
-	if $Spawner/PointLight2D.energy > 0.0:
-		$Spawner/PointLight2D.energy -= 0.1
+	if weapons[gun].get("despawn_delay"):
+		bullet.despawn_delay = weapons[gun]["despawn_delay"]
+	if weapons[gun].get("effects"):
+		bullet.effects = weapons[gun]["effects"]
+	if weapons[gun].get("bullet_texture"):
+		bullet.get_node_or_null("Sprite2D").texture = weapons[gun]["bullet_texture"]

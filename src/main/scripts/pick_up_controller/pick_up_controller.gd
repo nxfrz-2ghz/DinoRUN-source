@@ -15,7 +15,7 @@ const S := {
 	},
 }
 
-const max_distance: float = 30.0
+const max_distance: float = 40.0
 const min_time_scale: float = 0.5
 
 const camera_default_pos := Vector2(320.0, 180.0)

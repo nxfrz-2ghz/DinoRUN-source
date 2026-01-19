@@ -108,7 +108,7 @@ func _set_left_right_rotation_arm(x: float, center: float, is_gun: bool) -> void
 
 
 func _rotating() -> void:
-	var is_gun: bool = arm.weapon.WEAPONS[arm.weapon.inventory[1]["name"]].has("power")
+	var is_gun: bool = arm.weapon.weapons[arm.weapon.inventory[1]["name"]].has("power")
 	if OS.has_feature("mobile"):
 		var j2 = M.C.mobile.j2
 		var j1 = M.C.mobile.j1
@@ -243,15 +243,12 @@ func _physics_process(delta: float) -> void:
 	
 	if self.position.x < -5:
 		if leave_damage_delay.is_stopped():
-			velocity.x += 80000.0 / ((10 * int(!is_on_floor())) + 1)
+			velocity.x += 80000.0 / ((30 * int(!is_on_floor())) + 1)
 			M.C.screen_text.add_message("YOU CAN'T LEAVE")
 			leave_damage_delay.start()
 	
 	if self.position.x > M.screen.x + 5:
-		if leave_damage_delay.is_stopped():
-			velocity.x += -80000.0 / ((10 * int(!is_on_floor())) + 1)
-			M.C.screen_text.add_message("YOU CAN'T LEAVE")
-			leave_damage_delay.start()
+		self.position.x = 0
 	
 	@warning_ignore("integer_division")
 	if self.position.y > M.screen.y + 5:

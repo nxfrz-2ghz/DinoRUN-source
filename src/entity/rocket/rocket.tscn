@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dakyn1fnphbaw"]
+
+[ext_resource type="Script" uid="uid://t36liqfe7yae" path="res://src/entity/rocket/rocket.gd" id="1_87wnu"]
+[ext_resource type="Texture2D" uid="uid://2xt7yokfoh6s" path="res://res/sprites/entity/rocket_bullet/rocket_bullet.png" id="1_dd2he"]
+[ext_resource type="PackedScene" uid="uid://ciqn2labd3uyf" path="res://src/particles/particles.tscn" id="2_87wnu"]
+[ext_resource type="Texture2D" uid="uid://bhcanjov1p5qb" path="res://res/sprites/particles/fire_particle.png" id="3_emowy"]
+[ext_resource type="Texture2D" uid="uid://hdy3turfe02v" path="res://res/sprites/world/circle_05.png" id="4_isn33"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpdtp"]
+radius = 3.0
+height = 18.0
+
+[node name="Rocket" type="RigidBody2D"]
+gravity_scale = 0.039
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_87wnu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(12.175, 4.47)
+scale = Vector2(0.18120807, 0.14736843)
+texture = ExtResource("1_dd2he")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13, 5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_kpdtp")
+
+[node name="Particles" parent="." instance=ExtResource("2_87wnu")]
+position = Vector2(0.33, 5)
+emitting = true
+amount = 15
+texture = ExtResource("3_emowy")
+one_shot = false
+
+[node name="PointLight2D" type="PointLight2D" parent="Particles"]
+color = Color(1, 0.6627451, 0, 1)
+energy = 0.24
+texture = ExtResource("4_isn33")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

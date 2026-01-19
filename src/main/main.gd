@@ -10,4 +10,3 @@ var screen: Vector2 = DisplayServer.window_get_size() / (DisplayServer.window_ge
 
 func _ready() -> void:
 	S.connection.start()
-	C.player.get_node_or_null("AudioStreamPlayer").play_music()
