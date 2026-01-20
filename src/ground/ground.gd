@@ -108,7 +108,8 @@ func _ready() -> void:
 
 	gen_location_tile(location, tile_0)
 	gen_location_tile(location, tile_1)
-	_set_location_to_blayers()
+	#_set_location_to_blayers()
+	$AnimationPlayer.play("start")
 
 
 func _set_location_to_blayers() -> void:

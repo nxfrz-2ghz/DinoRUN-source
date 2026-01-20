@@ -6,11 +6,6 @@ func _ready() -> void:
 	add_item("base_sword")
 
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("swap_button_click"):
-		swap_items()
-
-
 func swap_items() -> void:
 	
 	if anim_player.is_playing(): return
@@ -45,6 +40,10 @@ func shoot() -> void:
 	super()
 
 
+func _on_melee_hitbox_attack_body_entered(body: Node2D) -> void:
+	if body.name != "Dino": super(body)
+
+
 func spawn_bullet(gun: String) -> void:
 	
 	# Тряска Камеры и Вспышка
@@ -56,5 +55,9 @@ func spawn_bullet(gun: String) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	
+	if Input.is_action_just_pressed("swap_button_click"):
+		swap_items()
+	
 	if $Spawner/PointLight2D.energy > 0.0:
 		$Spawner/PointLight2D.energy -= 0.1

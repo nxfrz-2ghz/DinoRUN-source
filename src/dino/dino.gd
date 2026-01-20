@@ -16,6 +16,7 @@ const ghost_particle := preload("res://src/entity/ghost/ghost.tscn")
 
 const SPEED := 120.0
 const DASH_POWER := 2540.0
+const TELEPORTATION_POWER := 80
 const JUMP_VELOCITY := -350.0
 const JUMP_BUFFER_TIME := 0.15
 
@@ -43,6 +44,8 @@ func spawn_text(text: String, color: Color) -> void:
 
 
 func receive_damage(dmg: float) -> void:
+	if !alive: return
+	
 	current_health -= dmg
 	if current_health > MAX_HEALTH * 1.5:
 		current_health = MAX_HEALTH * 1.5
@@ -57,7 +60,12 @@ func receive_damage(dmg: float) -> void:
 		spawn_text("+" + str(-dmg) + "!", Color.GREEN)
 	
 	if current_health <= 0:
-		get_tree().reload_current_scene()
+		M.get_node_or_null("CutScenes/CutScenes").play("game_over")
+		M.C.screen_text.add_message("GAME OVER")
+		M.C.player.queue_free()
+		alive = false
+		M.game = false
+		M.get_node_or_null("CutScenes/CutScenes/RecordLabel").text = "RECORD\n" + str(M.C.way_bar.get_node_or_null("HBoxContainer/RichTextLabel").text.substr(6, 11))
 
 
 func receive_effects(effects: Dictionary) -> void:
@@ -109,7 +117,7 @@ func _set_left_right_rotation_arm(x: float, center: float, is_gun: bool) -> void
 
 func _rotating() -> void:
 	var is_gun: bool = arm.weapon.weapons[arm.weapon.inventory[1]["name"]].has("power")
-	if OS.has_feature("mobile"):
+	if M.mobile:
 		var j2 = M.C.mobile.j2
 		var j1 = M.C.mobile.j1
 		
@@ -175,11 +183,11 @@ func process_effects() -> void:
 
 
 func _spawn_ghost() -> void:
-		var ghost: Sprite2D = ghost_particle.instantiate()
-		ghost.texture = anim_sprite.get_sprite_frames().get_frame_texture(anim_sprite.animation, anim_sprite.frame)
-		ghost.flip_h = anim_sprite.flip_h
-		M.E.add_child(ghost)
-		ghost.position = self.position
+	var ghost: Sprite2D = ghost_particle.instantiate()
+	ghost.texture = anim_sprite.get_sprite_frames().get_frame_texture(anim_sprite.animation, anim_sprite.frame)
+	ghost.flip_h = anim_sprite.flip_h
+	M.E.add_child(ghost)
+	ghost.position = self.position
 
 
 func dash(direction: int) -> void:
@@ -223,8 +231,12 @@ func _physics_process(delta: float) -> void:
 				dash(-1)
 			elif Input.is_action_just_pressed("r_dash"):
 				dash(1)
+			elif Input.is_action_just_pressed("tp_dash"):
+				_spawn_ghost()
+				self.position.x += TELEPORTATION_POWER * ((int(!anim_sprite.flip_h)*2)-1)
+				dash_cooldown.start()
 		
-		if Input.is_action_pressed("lmb") and !OS.has_feature("mobile"):
+		if Input.is_action_pressed("lmb") and !M.mobile:
 			arm.weapon.shoot()
 	
 		if Input.is_action_just_pressed("ui_up"): # Добавляем прыжок в jump_buffer

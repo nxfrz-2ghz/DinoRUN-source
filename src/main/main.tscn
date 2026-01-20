@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://2n4qt10vm7m0"]
+[gd_scene load_steps=29 format=3 uid="uid://2n4qt10vm7m0"]
 
 [ext_resource type="Script" uid="uid://bgl0eeblg4ins" path="res://src/main/main.gd" id="1_djufw"]
 [ext_resource type="Script" uid="uid://dt5r8ge5kfj4l" path="res://src/main/scripts/scripts.gd" id="2_jkpqq"]
@@ -57,6 +57,113 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-271, 180)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutScenes/MeshInstance2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CutScenes/Label:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CutScenes:error_console_text_spam")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_6iek0"]
+resource_name = "game_over"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CutScenes/MeshInstance2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutScenes/Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.02, 1.11, 1.19, 1.2866666, 1.3666667, 1.4566667, 1.5433333, 1.6066667, 1.6966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["0x00 ERROR", "0x00 ERROR
+0x16 ERROR", "0x00 ERROR
+0x16 ERROR
+LIVE MODULE not available", "0x00 ERROR
+0x16 ERROR
+LIVE MODULE not available
+DINO NOT FOUND
+", "0x00 ERROR
+0x16 ERROR
+LIVE MODULE not available
+DINO NOT FOUND
+0x^ E$IO$", "0x00 ERROR
+0x16 ERROR
+LIVE MODULE not available
+DINO NOT FOUND
+0x^ E$IO$
+REBOOTING", "0x00 ERROR
+0x16 ERROR
+LIVE M#DULE no2 available
+DIN@ NOT FOUND
+0x^ E$IO$
+REBOOTING.", "0x00 ERROR
+0x16 ERROR
+LI$ M#DULE no2#vailable
+D@@& NOT F&ND
+0x^ E$IO$
+REBOOTING..", "0x24 ER%OR
+0x#6 ER$$R
+LI$ M#DULE no2#vailable
+D@@& NOT F&ND
+0x^ E$IO$
+REBOOTING..."]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CutScenes:error_console_text_spam")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.86),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_30cu5"]
@@ -137,39 +244,25 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 2.1166668)
 }
 tracks/3/use_blend = true
-tracks/4/type = "method"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../CanvasLayer/MobileControl")
+tracks/4/path = NodePath("CutScenes/WallOfFlesh:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(5.9333334),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"ready"
-}]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("CutScenes/WallOfFlesh:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0, 2.8, 5.9666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-871, 180), Vector2(-271, 180), Vector2(-130, 180)]
 }
-tracks/6/type = "method"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("../Environment/Camera2D")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Environment/Camera2D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(2.0666666, 2.1666667, 2.2666667, 2.3366668, 2.4066668, 2.4666667, 2.5466666, 2.5866668, 2.6366668, 2.6666667, 2.7066667, 2.7666667, 2.7866666, 2.8266668, 2.8766668, 2.9866667, 3.17, 3.2700002, 3.3666666, 3.5333335, 3.6333337, 3.7333336),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
@@ -244,8 +337,17 @@ tracks/6/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_frqgp"]
 _data = {
 &"RESET": SubResource("Animation_frqgp"),
+&"game_over": SubResource("Animation_6iek0"),
 &"start_game": SubResource("Animation_30cu5")
 }
+
+[sub_resource type="BoxMesh" id="BoxMesh_6iek0"]
+
+[sub_resource type="Gradient" id="Gradient_7oe52"]
+colors = PackedColorArray(0, 0, 0, 1, 0.012617188, 0.012617188, 0.012617188, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v0ijp"]
+gradient = SubResource("Gradient_7oe52")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30cu5"]
 radius = 177.6
@@ -283,6 +385,33 @@ script = ExtResource("9_hmxxs")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CutScenes/CutScenes"]
 bus = &"Sounds"
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="CutScenes/CutScenes"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(408.00003, 176)
+scale = Vector2(1452.0001, 588.00006)
+mesh = SubResource("BoxMesh_6iek0")
+texture = SubResource("GradientTexture2D_v0ijp")
+
+[node name="Label" type="Label" parent="CutScenes/CutScenes"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -248.0
+offset_top = -193.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("14_hc2u7")
+
+[node name="RecordLabel" type="Label" parent="CutScenes/CutScenes"]
+offset_left = 21.0
+offset_top = 113.0
+offset_right = 230.0
+offset_bottom = 283.0
+theme_override_fonts/font = ExtResource("14_hc2u7")
+theme_override_font_sizes/font_size = 32
 
 [node name="WallOfFlesh" type="Sprite2D" parent="CutScenes/CutScenes"]
 position = Vector2(-271, 180)

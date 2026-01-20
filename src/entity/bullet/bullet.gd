@@ -14,7 +14,7 @@ var effects: Dictionary
 
 func _integrate_forces(state) -> void:
 	var trans = state.transform
-	trans.origin.x -= screen_speed * Engine.time_scale
+	trans.origin.x += screen_speed * Engine.time_scale
 	state.transform = trans
 
 

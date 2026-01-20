@@ -10,8 +10,8 @@ const txt_particle := preload("res://src/entity/txt_particle/txt_particle.tscn")
 		M.E.ground.speed = value
 		if value > 0:
 			M.E.dino.anim_sprite.play("run")
-	get:
-		return run_speed
+
+@export var error_console_text_spam := 0
 
 
 func dino_scream() -> void:
@@ -34,3 +34,12 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		M.E.dino.alive = true
 		M.C.player.get_node_or_null("AudioStreamPlayer").play_music()
 		M.C.screen_text.add_message("RUN!")
+		M.C.mobile.onready(M.mobile)
+	if anim_name == "game_over":
+		get_tree().reload_current_scene()
+
+
+func _physics_process(_delta: float) -> void:
+	if error_console_text_spam > 0:
+		$Label.text += str(error_console_text_spam)+"x"+str(error_console_text_spam)+"\n"
+		error_console_text_spam += error_console_text_spam

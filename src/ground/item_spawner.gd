@@ -65,7 +65,7 @@ func spawn(world_seed: int, pos_x: int, location: int, distance: int) -> void:
 	
 	var current_item: String
 	
-	if rng.randi_range(0, 15) == 0:
+	if rng.randi_range(0, 20) == 0:
 		var weapons = items.keys().filter(func(id): return items[id].weapon)
 		current_item = weapons[randi() % weapons.size()]
 	else:

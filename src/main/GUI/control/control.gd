@@ -6,9 +6,10 @@ extends Control
 @onready var rdash := $RightJoystick/RDashButton
 @onready var timer_clear_text := $TextClear
 
+var mobile := false
 
 func set_super_button_text(txt: String) -> void:
-	if OS.has_feature("mobile"):
+	if mobile:
 		j2.get_node_or_null("SuperButton/Label").text = txt
 		timer_clear_text.start()
 
@@ -17,9 +18,10 @@ func _on_text_clear_timeout() -> void:
 	j2.get_node_or_null("SuperButton/Label").text = ""
 
 
-func ready() -> void:
+func onready(ifmobile: bool) -> void:
+	mobile = ifmobile
 	
-	if OS.has_feature("mobile"):
+	if mobile:
 		j1.show()
 		j2.show()
 		ldash.show()

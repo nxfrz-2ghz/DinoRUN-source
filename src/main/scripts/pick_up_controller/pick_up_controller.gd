@@ -15,7 +15,7 @@ const S := {
 	},
 }
 
-const max_distance: float = 40.0
+const max_distance: float = 50.0
 const min_time_scale: float = 0.5
 
 const camera_default_pos := Vector2(320.0, 180.0)
@@ -61,6 +61,5 @@ func _physics_process(_delta: float) -> void:
 	
 	var target_scale = remap(closest_distance, 0, max_distance, min_time_scale, 1.0)
 	
-	#M.E.camera.zoom = Vector2.ONE / abs(target_scale - target_scale*5)
 	if closest_drop.item in weapon.weapons.keys():
 		Engine.time_scale = clamp(target_scale, min_time_scale, 1.0)

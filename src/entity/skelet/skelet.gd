@@ -17,6 +17,8 @@ func moving() -> void:
 	
 	if anim_sprite.animation == "walking":
 		
+		if abs(M.E.dino.position.x - self.position.x) < 30 and abs(M.E.dino.position.y - self.position.y) < 30: return
+		
 		velocity.x += speed * ((int(!rotated)*2)-1)
 		
 		if jump_delay.is_stopped():
@@ -25,7 +27,7 @@ func moving() -> void:
 				jump_delay.start()
 			
 			# Прыжок, если игрок над мобом
-			if abs(M.E.dino.position.x - self.position.x) < 50 and M.E.dino.position.y - self.position.y < 50:
+			if abs(M.E.dino.position.x - self.position.x) < 50 and M.E.dino.position.y - self.position.y < -30:
 				velocity.y = jump_velocity
 				collider.disabled = true
 
@@ -45,6 +47,8 @@ func braking() -> void:
 
 
 func rotating() -> void:
+	if anim_sprite.animation == "attack": return
+	
 	if M.E.dino.position.x < self.position.x:
 		rotated = true
 		anim_sprite.scale.x = -0.5
