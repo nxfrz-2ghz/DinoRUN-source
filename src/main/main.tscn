@@ -1,15 +1,17 @@
-[gd_scene load_steps=29 format=3 uid="uid://2n4qt10vm7m0"]
+[gd_scene load_steps=33 format=3 uid="uid://2n4qt10vm7m0"]
 
 [ext_resource type="Script" uid="uid://bgl0eeblg4ins" path="res://src/main/main.gd" id="1_djufw"]
 [ext_resource type="Script" uid="uid://dt5r8ge5kfj4l" path="res://src/main/scripts/scripts.gd" id="2_jkpqq"]
 [ext_resource type="Script" uid="uid://dap580wnq583u" path="res://src/main/scripts/connection_control.gd" id="3_jkpqq"]
-[ext_resource type="Script" uid="uid://dpksdm7tn46hn" path="res://src/main/scripts/settings_control.gd" id="4_jqarl"]
+[ext_resource type="Script" uid="uid://7ky08drplfsr" path="res://src/main/scripts/disk_control.gd" id="4_v0ijp"]
 [ext_resource type="Script" uid="uid://c4mthg57xawfq" path="res://src/main/environment/environment.gd" id="5_jqarl"]
+[ext_resource type="Script" uid="uid://c827lkhhr1lwi" path="res://src/main/scripts/upgrades.gd" id="5_nevsn"]
 [ext_resource type="AudioStream" uid="uid://dbyfciuth01e7" path="res://res/sounds/bird.mp3" id="6_frqgp"]
 [ext_resource type="Script" uid="uid://dsjb82nvhqj07" path="res://src/main/camera_2d.gd" id="6_w0wra"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="7_30cu5"]
 [ext_resource type="Texture2D" uid="uid://b2871vhbi5hsl" path="res://res/sprites/buttons/swap_button.png" id="7_frqgp"]
 [ext_resource type="AudioStream" uid="uid://bh0oiyugnsxre" path="res://res/sounds/boss_summon.mp3" id="7_km7bn"]
+[ext_resource type="AudioStream" uid="uid://bqxt5lx3ru5mk" path="res://res/sounds/damage/damage_final_hit.mp3" id="7_v0ijp"]
 [ext_resource type="Script" uid="uid://d14i8wmnx6q8n" path="res://src/main/GUI/control/control.gd" id="9_erw1m"]
 [ext_resource type="Script" uid="uid://bqb3pcdwh2ijo" path="res://src/main/cutscenes/cut_scenes.gd" id="9_hmxxs"]
 [ext_resource type="Script" uid="uid://dybpm6c7gdse7" path="res://src/main/GUI/canvas_layer.gd" id="10_4tqcc"]
@@ -19,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://dtlrqceftv3g0" path="res://src/ui/way_pbar/way_p_bar.tscn" id="13_6iek0"]
 [ext_resource type="PackedScene" uid="uid://b7ibtnd3036x" path="res://src/ui/hp_bar/hp_bar.tscn" id="14_6iek0"]
 [ext_resource type="FontFile" uid="uid://dti745xfqphoj" path="res://res/fonts/Peaberry-Bold.ttf" id="14_hc2u7"]
+[ext_resource type="SpriteFrames" uid="uid://dsu6tcv7vpuxg" path="res://res/sprites/items/coin/frames.tres" id="15_g523h"]
+[ext_resource type="PackedScene" uid="uid://bkl0igk1rjuid" path="res://src/main/GUI/menu/menu.tscn" id="22_suhym"]
 
 [sub_resource type="Animation" id="Animation_frqgp"]
 length = 0.001
@@ -165,6 +169,35 @@ tracks/2/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutScenes/AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_v0ijp")
+}],
+"times": PackedFloat32Array(0.06666667)
+}
+tracks/3/use_blend = true
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Scripts/Upgrades")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.099999994),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"save_upgrades"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_30cu5"]
 resource_name = "start_game"
@@ -251,7 +284,7 @@ tracks/4/path = NodePath("CutScenes/WallOfFlesh:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 2.8, 5.9666667),
+"times": PackedFloat32Array(0, 2.8, 6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-871, 180), Vector2(-271, 180), Vector2(-130, 180)]
@@ -333,6 +366,20 @@ tracks/5/keys = {
 "method": &"add_trauma"
 }]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Scripts/Upgrades")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"load_upgrades"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_frqgp"]
 _data = {
@@ -364,8 +411,11 @@ script = ExtResource("2_jkpqq")
 [node name="ConnectionControl" type="Node" parent="Scripts"]
 script = ExtResource("3_jkpqq")
 
-[node name="SettingsControl" type="Node" parent="Scripts"]
-script = ExtResource("4_jqarl")
+[node name="DiskControl" type="Node" parent="Scripts"]
+script = ExtResource("4_v0ijp")
+
+[node name="Upgrades" type="Node" parent="Scripts"]
+script = ExtResource("5_nevsn")
 
 [node name="Environment" type="Node2D" parent="."]
 script = ExtResource("5_jqarl")
@@ -431,6 +481,20 @@ flip_h = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("10_4tqcc")
 
+[node name="CoinsLabel" type="Label" parent="CanvasLayer"]
+offset_left = 517.84
+offset_top = 21.64
+offset_right = 537.84
+offset_bottom = 38.64003
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("14_hc2u7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(500, 20)
+sprite_frames = ExtResource("15_g523h")
+autoplay = "default"
+centered = false
+
 [node name="HUD" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 394.0
 offset_bottom = 100.0
@@ -445,6 +509,7 @@ layout_mode = 2
 
 [node name="AudioPlayer" parent="CanvasLayer/HUD/HBoxContainer" instance=ExtResource("10_ibsor")]
 layout_mode = 2
+size_flags_horizontal = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/HBoxContainer"]
 layout_mode = 2
@@ -616,6 +681,11 @@ position = Vector2(57, 38.999996)
 scale = Vector2(0.265, 0.265)
 shape = SubResource("CircleShape2D_30cu5")
 action = "ui_accept"
+
+[node name="Menu" parent="CanvasLayer" instance=ExtResource("22_suhym")]
+visible = false
+offset_top = -1.5
+offset_bottom = 1.5
 
 [connection signal="animation_finished" from="CutScenes/CutScenes" to="CutScenes/CutScenes" method="_on_animation_finished"]
 [connection signal="timeout" from="CanvasLayer/ScreenText/Timer" to="CanvasLayer/ScreenText" method="_on_timer_timeout"]

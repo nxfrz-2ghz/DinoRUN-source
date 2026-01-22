@@ -12,12 +12,15 @@ var velocity := Vector2.ZERO
 
 
 func _integrate_forces(state) -> void:
+	if !M.game: return
+	
 	var trans = state.transform
 	trans.origin.x -= M.E.ground.speed * Engine.time_scale
 	state.transform = trans
 
 
 func _physics_process(delta: float) -> void:
+	if !M.game: return
 	
 	# Ускорение в направлении, куда направлен узел
 	var direction := Vector2(cos(rotation), sin(rotation))

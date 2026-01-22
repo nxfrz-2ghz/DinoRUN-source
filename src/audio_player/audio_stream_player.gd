@@ -20,12 +20,15 @@ const GAME_MUSIC := [
 	"res://res/music/29 Chaos #1.mp3",
 	"res://res/music/30 RLD Installer #10.mp3",
 	"res://res/music/31 Unreeeal superhero 3.mp3",
-	"res://res/music/32 Aurora dawn.mp3",
 	"res://res/music/33 BrD.mp3",
 	"res://res/music/34 Hybrid song.mp3",
 	"res://res/music/35 Tekilla Groove.mp3",
 	"res://res/music/36 Mr. Spock's cryo-bed.mp3",
 	"res://res/music/39 Blank page.mp3",
+]
+
+const HOME_MUSIC := [
+	"res://res/music/32 Aurora dawn.mp3",
 ]
 
 
@@ -34,8 +37,13 @@ func _input(_event: InputEvent) -> void:
 		play_music()
 
 
-func play_music() -> void:
-	var rand_music: String = GAME_MUSIC[randi_range(0, GAME_MUSIC.size()-1)]
+func play_music(text: String = "") -> void:
+	var rand_music: String
+	if text == "home":
+		rand_music = HOME_MUSIC[randi_range(0, HOME_MUSIC.size()-1)]
+	else:
+		rand_music = GAME_MUSIC[randi_range(0, GAME_MUSIC.size()-1)]
+	
 	self.stream = load(rand_music)
 	
 	# Getting music name

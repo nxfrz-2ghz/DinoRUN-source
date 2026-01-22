@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var M := $"/root/Main"
 
+@onready var home_location := $home_location
+
 @onready var tile_0: TileMapLayer = $Tile_0
 @onready var tile_1: TileMapLayer = $Tile_1
 
@@ -96,20 +98,30 @@ var speed: float = 0.0:
 
 
 func _ready() -> void:
-	tile_0.position.x = 0 + start_offset
-	tile_1.position.x = M.screen.x + start_offset
-	
-	M.C.way_bar.max_value = M.screen.x * LOCATION_DISTANCE * 4
-	
-	
-	# Setup noise
-	noise = FastNoiseLite.new()
-	noise.seed = int(world_seed)
+	if M.home:
+		tile_0.queue_free()
+		tile_1.queue_free()
+		mob_spawner.queue_free()
+		item_spawner.queue_free()
+		$AnimationPlayer.queue_free()
+		$Layers.queue_free()
+	else:
+		M.S.disk.save("home", true)
+		home_location.queue_free()
+		
+		tile_0.position.x = 0 + start_offset
+		tile_1.position.x = M.screen.x + start_offset
+		
+		M.C.way_bar.max_value = M.screen.x * LOCATION_DISTANCE * 4
+		
+		
+		# Setup noise
+		noise = FastNoiseLite.new()
+		noise.seed = int(world_seed)
 
-	gen_location_tile(location, tile_0)
-	gen_location_tile(location, tile_1)
-	#_set_location_to_blayers()
-	$AnimationPlayer.play("start")
+		gen_location_tile(location, tile_0)
+		gen_location_tile(location, tile_1)
+		$AnimationPlayer.play("start")
 
 
 func _set_location_to_blayers() -> void:
@@ -131,14 +143,13 @@ func move_tile(tile: TileMapLayer) -> void:
 		@warning_ignore("integer_division")
 		for i in range(ceil(distance/10+location)+1):
 			await get_tree().create_timer(0.1).timeout
-			mob_spawner.spawn(world_seed, M.screen, location, distance)
+			mob_spawner.spawn(world_seed, M.screen, location, distance, M.S.time_controller.is_night())
 		distance += 1
 		speed += 0.05
 		
 		if distance > LOCATION_DISTANCE:
 			distance = 0
 			location += 1
-			speed -= 0.8
 			$AnimationPlayer.play("change_location")
 
 
@@ -242,6 +253,7 @@ func gen_location_tile(loc: int, tile: TileMapLayer) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if !M.game: return
+	if M.home: return
 	
 	move_tile(tile_0)
 	move_tile(tile_1)
@@ -250,6 +262,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_item_spawn_cd_timeout() -> void:
+	if !M.game: return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = location + distance + world_seed
 	$ItemSpawner/ItemSpawnCD.wait_time = randf_range(0.5, 5.0)

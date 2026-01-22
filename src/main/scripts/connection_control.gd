@@ -11,6 +11,7 @@ const res := [
 const scripts := [
 	"res://src/main/scripts/pick_up_controller/pick_up_controller.tscn",
 	"res://src/main/scripts/time_controller/time_controller.tscn",
+	"res://src/main/scripts/settings/settings.tscn",
 ]
 
 
@@ -19,6 +20,11 @@ func connect_node(node: Node) -> void:
 		M.E.ground = M.E.get_node_or_null("Ground")
 	if node.name == "Dino":
 		M.E.dino = M.E.get_node_or_null("Dino")
+	
+	if node.name == "TimeController":
+		M.S.time_controller = M.S.get_node_or_null("TimeController")
+	if node.name == "Settings":
+		M.S.settings = M.S.get_node_or_null("Settings")
 
 
 func start() -> void:
@@ -38,4 +44,14 @@ func start() -> void:
 		connect_node(node)
 	
 	M.game = true
-	$"../../CutScenes/CutScenes".play("start_game")
+	if !M.home:
+		M.cutscenes.play("start_game")
+	else:
+		M.E.dino.alive = true
+		M.C.player.get_node_or_null("AudioStreamPlayer").play_music("home")
+		M.C.screen_text.add_message("HOME")
+		M.C.mobile.onready(M.mobile)
+		M.S.time_controller.queue_free()
+		M.E.get_node("SceneLight").queue_free()
+		M.C.way_bar.queue_free()
+		M.C.hp_bar.visible = false

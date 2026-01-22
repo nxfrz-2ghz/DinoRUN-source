@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b2mycas1350is"]
+[gd_scene load_steps=16 format=3 uid="uid://b2mycas1350is"]
 
 [ext_resource type="Script" uid="uid://j7ubkoc18drp" path="res://src/ground/ground.gd" id="1_nuqmq"]
 [ext_resource type="Texture2D" uid="uid://b8j60mx7mh5in" path="res://res/sprites/world/background/forest/layer_2.png" id="2_4esli"]
@@ -7,6 +7,7 @@
 [ext_resource type="TileSet" uid="uid://sed48abpd3bl" path="res://res/sprites/tileset/world_tileset.tres" id="4_4esli"]
 [ext_resource type="Script" uid="uid://ccmbd5ksn5bub" path="res://src/ground/item_spawner.gd" id="4_72038"]
 [ext_resource type="FontFile" uid="uid://dti745xfqphoj" path="res://res/fonts/Peaberry-Bold.ttf" id="7_7oe52"]
+[ext_resource type="PackedScene" uid="uid://brt7phgil0rp3" path="res://src/locations/home/home_location.tscn" id="8_7hl2a"]
 
 [sub_resource type="Animation" id="Animation_m7rwf"]
 length = 0.001
@@ -201,16 +202,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -69.0
-offset_top = -50.5
+offset_left = -130.0
+offset_top = -77.0
 offset_right = 69.0
 offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("7_7oe52")
+theme_override_font_sizes/font_size = 24
 text = "WASD
 LMB - shoot
 RMB - swap items
 Q, E - dash"
+
+[node name="home_location" parent="." instance=ExtResource("8_7hl2a")]
 
 [connection signal="timeout" from="ItemSpawner/ItemSpawnCD" to="." method="_on_item_spawn_cd_timeout"]

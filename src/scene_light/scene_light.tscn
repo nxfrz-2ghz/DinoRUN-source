@@ -22,8 +22,7 @@ texture = ExtResource("1_bptx2")
 [node name="PointLight2D2" type="PointLight2D" parent="Sun"]
 position = Vector2(0, 1000)
 scale = Vector2(6.175781, 4.7539063)
-color = Color(0, 0, 0, 1)
-energy = 0.3
+color = Color(0.06879827, 0.06879828, 0.06879828, 1)
 blend_mode = 2
 range_item_cull_mask = 3
 texture = ExtResource("1_bptx2")

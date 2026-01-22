@@ -20,6 +20,12 @@ const night_speed_up := 4
 var last_sun_pos: float = 0
 
 
+func is_night() -> bool:
+	if night_sky.modulate.a == 0:
+		return false
+	return true
+
+
 func _ready() -> void:
 	sky_update()
 

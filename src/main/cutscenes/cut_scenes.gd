@@ -35,7 +35,9 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		M.C.player.get_node_or_null("AudioStreamPlayer").play_music()
 		M.C.screen_text.add_message("RUN!")
 		M.C.mobile.onready(M.mobile)
+		$WallOfFlesh.queue_free()
 	if anim_name == "game_over":
+		M.S.disk.save("home", true)
 		get_tree().reload_current_scene()
 
 

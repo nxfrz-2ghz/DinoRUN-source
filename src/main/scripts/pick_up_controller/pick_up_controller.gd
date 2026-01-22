@@ -54,6 +54,7 @@ func _physics_process(_delta: float) -> void:
 		
 		if closest_drop.item == "coin":
 			M.E.dino.spawn_text("+" + str(S["coin"]["value"]), Color.GOLD)
+			M.S.upgrades.coins += 100
 		
 		play(S[closest_drop.item]["sound"])
 		closest_drop.queue_free()

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwawsq878j8ma"]
+
+[ext_resource type="Script" uid="uid://c0kqls0olyekg" path="res://src/particles/damage_particles/damage_particles.gd" id="1_aj1t8"]
+
+[sub_resource type="Gradient" id="Gradient_ur0h8"]
+offsets = PackedFloat32Array(0, 0.57272726, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mrrdf"]
+gradient = SubResource("Gradient_ur0h8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lkcec"]
+particle_flag_disable_z = true
+angle_min = -44.99999
+angle_max = 45.00001
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 114.939995
+initial_velocity_max = 183.90999
+gravity = Vector3(0, 100, 0)
+scale_min = 0.5
+scale_max = 1.5
+color_ramp = SubResource("GradientTexture1D_mrrdf")
+
+[node name="DamageParticles" type="GPUParticles2D"]
+emitting = false
+amount = 5
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_lkcec")
+script = ExtResource("1_aj1t8")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

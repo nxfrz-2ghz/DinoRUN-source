@@ -5,8 +5,12 @@ extends Node2D
 const mob_weapon := preload("res://src/weapon/mob_weapon.tscn")
 
 const mobs := {
+	"night" : {
+		"fire_skelet" : preload("res://src/entity/skelet/fire_skelet/fire_skelet.tscn"),
+	},
 	"forest" : {
 		"skelet" : preload("res://src/entity/skelet/skelet.tscn"),
+		"skelet_with_gun" : preload("res://src/entity/skelet/skelet_with_gun/skelet_with_gun.tscn"),
 		"rocks" : preload("res://src/entity/rocks/rocks.tscn"),
 	},
 	"desert" : {
@@ -16,9 +20,13 @@ const mobs := {
 }
 
 const mob_spawn_chances := {
+	"night" : {
+		"fire_skelet" : 100,
+	},
 	"forest" : {
 		"skelet" : 70,
-		"rocks" : 30,
+		"skelet_with_gun" : 10,
+		"rocks" : 20,
 	},
 	"desert" : {
 		"big_cactus" : 40,
@@ -53,7 +61,7 @@ func pick_mob_by_chance(rng: RandomNumberGenerator, biome: String) -> String:
 	return chances.keys()[0]
 
 
-func spawn(world_seed: int, screen: Vector2	, location: int, distance: int) -> void:
+func spawn(world_seed: int, screen: Vector2	, location: int, distance: int, night := false) -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = location + distance + world_seed
 	
@@ -66,11 +74,14 @@ func spawn(world_seed: int, screen: Vector2	, location: int, distance: int) -> v
 	
 	var mob: CharacterBody2D
 	
-	if location == 0:
+	if night and rng.randi_range(0, 3) == 0:
+		var mob_name = pick_mob_by_chance(rng, "night")
+		mob = mobs["night"][mob_name].instantiate()
+	elif location == 0:
 		var mob_name = pick_mob_by_chance(rng, "forest")
 		mob = mobs["forest"][mob_name].instantiate()
 	elif location == 1:
-		if rng.randi_range(0, 5) == 0:
+		if rng.randi_range(0, 3) == 0:
 			var mob_name = pick_mob_by_chance(rng, "forest")
 			mob = mobs["forest"][mob_name].instantiate()
 		else:
@@ -93,7 +104,7 @@ func spawn(world_seed: int, screen: Vector2	, location: int, distance: int) -> v
 		mob.modulate.r = 200
 		mob.speed *= 2
 		mob.damage *= 1.2
-	if rng.randf() <= 0.05:
+	if rng.randf() <= 0.01:
 		multiply_health(mob, 0.8)
 		mob.speed *= 0.9
 		mob.add_child(mob_weapon.instantiate())

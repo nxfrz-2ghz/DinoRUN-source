@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh74gkyibch0a"]
+
+[sub_resource type="Environment" id="Environment_a7nl6"]
+background_mode = 3
+tonemap_mode = 1
+tonemap_white = 0.65
+glow_enabled = true
+glow_intensity = 1.22
+glow_bloom = 1.0
+
+[node name="RTX" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a7nl6")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.27492493, 0.2842063, 0.3887746, 1)

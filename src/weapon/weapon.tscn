@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://chkqses5y7s7g"]
+[gd_scene load_steps=20 format=3 uid="uid://chkqses5y7s7g"]
 
 [ext_resource type="Texture2D" uid="uid://bb4kxo8ja2u4b" path="res://res/sprites/guns/4SniperRifle04.png" id="1_ot18a"]
 [ext_resource type="Script" uid="uid://dqonunp8hf0ih" path="res://src/weapon/weapon.gd" id="1_sjqur"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://ciqn2labd3uyf" path="res://src/particles/particles.tscn" id="10_3d3jh"]
 [ext_resource type="Texture2D" uid="uid://bhcanjov1p5qb" path="res://res/sprites/particles/fire_particle.png" id="11_ureym"]
 [ext_resource type="Texture2D" uid="uid://djs338u3qg217" path="res://res/sprites/guns/base_sword.png" id="13_3d3jh"]
+[ext_resource type="AudioStream" uid="uid://hbr2t7okw8ff" path="res://res/sounds/weapons/start_melee_attack.mp3" id="14_ureym"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qojts"]
 a = Vector2(-1.3107138, 11.949474)
@@ -56,6 +57,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Audio/MeleeAttackStarts:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_3d3jh"]
 resource_name = "melee_attack"
@@ -95,6 +108,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Audio/MeleeAttackStarts:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_sjqur"]
@@ -212,9 +237,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_y322d")
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"Sounds"
-
 [node name="Spawner" type="Node2D" parent="."]
 position = Vector2(22, -1)
 
@@ -223,5 +245,13 @@ position = Vector2(1, 1)
 color = Color(1, 1, 0.4117647, 1)
 energy = 0.0
 texture = ExtResource("8_xor88")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+bus = &"Sounds"
+
+[node name="MeleeAttackStarts" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("14_ureym")
 
 [connection signal="body_entered" from="Sprites/MeleeHitboxAttack" to="." method="_on_melee_hitbox_attack_body_entered"]

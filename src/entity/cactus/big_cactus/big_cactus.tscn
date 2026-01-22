@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b322gieyqh2v0"]
+[gd_scene load_steps=11 format=3 uid="uid://b322gieyqh2v0"]
 
 [ext_resource type="PackedScene" uid="uid://dsr0i1ygm5cch" path="res://src/entity/mob/mob.tscn" id="1_abpto"]
 [ext_resource type="Script" uid="uid://bqegn3rdlppvm" path="res://src/entity/cactus/cactus.gd" id="2_abpto"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://okp4tcye4qn5" path="res://res/sprites/entity/cactus/cactus1.png" id="4_e4xcy"]
 [ext_resource type="Texture2D" uid="uid://glykq2jyv5v7" path="res://res/sprites/entity/cactus/cactus3.png" id="5_1c5wb"]
 [ext_resource type="Texture2D" uid="uid://bajosgdyi6vau" path="res://res/sprites/entity/cactus/cactus2.png" id="6_v08up"]
+[ext_resource type="Texture2D" uid="uid://b66ljwycbyeo3" path="res://res/sprites/particles/on_damage/cracked_cactus.png" id="7_xm86a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ufp83"]
 animations = [{
@@ -33,10 +34,11 @@ height = 40.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dmu2g"]
 polygon = PackedVector2Array(-10, 21, 11, 21, 0, 19)
 
-[node name="BigCactus" groups=["mobs"] instance=ExtResource("1_abpto")]
+[node name="BigCactus" instance=ExtResource("1_abpto")]
 script = ExtResource("2_abpto")
 jump_velocity = -250.0
 damage = 1.5
+damage_particles_texture = ExtResource("7_xm86a")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_ufp83")

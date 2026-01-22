@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var M := $"/root/Main"
 
-@onready var audio_player := $AudioStreamPlayer
+@onready var audio_player := $Audio/AudioStreamPlayer
 @onready var anim_player := $AnimationPlayer
 @onready var spawner := $Spawner
 
@@ -30,6 +30,7 @@ const weapons := {
 		"spread_deg": 2.0,
 		"sound": preload("res://res/sounds/weapons/gun/gun shot.mp3"),
 		"quiet": false,
+		"can_use_mob": true,
 	},
 	"shotgun": {
 		"damage": 0.8,
@@ -38,6 +39,7 @@ const weapons := {
 		"spread_deg": 12.0,
 		"sound": preload("res://res/sounds/weapons/shotgun/shotgun shot.mp3"),
 		"quiet": false,
+		"can_use_mob": true,
 		"bullets": 6,
 		"knockback": 500,
 	},
@@ -48,6 +50,7 @@ const weapons := {
 		"spread_deg": 4.0,
 		"sound": preload("res://res/sounds/weapons/gun/gun shot.mp3"),
 		"quiet": false,
+		"can_use_mob": true,
 	},
 	"M4": {
 		"damage": 0.3,
@@ -56,6 +59,7 @@ const weapons := {
 		"spread_deg": 3.0,
 		"sound": preload("res://res/sounds/weapons/gun/gun shot.mp3"),
 		"quiet": false,
+		"can_use_mob": true,
 	},
 	"rocket_launcher": {
 		"damage": 2.0,
@@ -63,6 +67,7 @@ const weapons := {
 		"speed": 0.5,
 		"sound": preload("res://res/sounds/weapons/rocket_launcher/rl_launch.mp3"),
 		"quiet": false,
+		"can_use_mob": false,
 		"knockback": 100,
 		"custom_bullet": preload("res://src/entity/rocket/rocket.tscn"),
 	},
@@ -73,6 +78,7 @@ const weapons := {
 		"spread_deg": 0.2,
 		"sound": preload("res://res/sounds/weapons/plasma_rifle/plasma_rifle_shot.mp3"),
 		"quiet": false,
+		"can_use_mob": true,
 	},
 	"toxic_gun": {
 		"damage": 0.1,
@@ -81,6 +87,7 @@ const weapons := {
 		"spread_deg": 0,
 		"sound": null,
 		"quiet": true,
+		"can_use_mob": true,
 		"effects":
 		{
 			"poison":
@@ -97,6 +104,7 @@ const weapons := {
 		"damage": 1.2,
 		"speed": 0.6,
 		"sound": null,
+		"can_use_mob": false,
 		"effects":
 		{
 			"fire":
@@ -110,12 +118,14 @@ const weapons := {
 	"base_sword": {
 		"damage": 1.2,
 		"speed": 1,
-		"sound": null,
+		"sound": preload("res://res/sounds/weapons/sword/hit.mp3"),
+		"can_use_mob": false,
 	},
 	"": {
 		"speed": 0.0,
 		"sound": null,
 		"quiet": true,
+		"can_use_mob": false,
 	},
 }
 
@@ -200,7 +210,7 @@ func shoot() -> void:
 		if weapons[weapon].get("knockback"):
 			var knockback: int = weapons[weapon]["knockback"]
 			knockback += floor(lvl_multiplier(knockback))
-			M.E.dino.velocity += Vector2.RIGHT.rotated(self.global_rotation) * -knockback
+			get_parent().get_parent().velocity += Vector2.RIGHT.rotated(self.global_rotation) * -knockback
 		
 		anim_player.play("shoot")
 		
@@ -217,12 +227,14 @@ func _on_melee_hitbox_attack_body_entered(body: Node2D) -> void: # OM MELEE ATTA
 		var weapon: String = inventory[1]["name"]
 		if body.has_method("receive_damage") and weapons[weapon].get("damage"):
 			body.receive_damage(weapons[weapon]["damage"])
-			$Sprites/MeleeHitboxAttack/CollisionShape2D.disabled = true
-			anim_player.play("RESET")
+			$Sprites/MeleeHitboxAttack/CollisionShape2D.set_deferred("disabled", true)
+			audio_player.pitch_scale = randf_range(0.8, 1.0)
+			audio_player.play()
 		if body.has_method("receive_effects") and weapons[weapon].get("effects"):
 			body.receive_effects(weapons[weapon]["effects"])
-			$Sprites/MeleeHitboxAttack/CollisionShape2D.disabled = true
-			anim_player.play("RESET")
+			$Sprites/MeleeHitboxAttack/CollisionShape2D.set_deferred("disabled", true)
+			audio_player.pitch_scale = randf_range(0.8, 1.0)
+			audio_player.play()
 
 
 func spawn_bullet(gun: String) -> void:

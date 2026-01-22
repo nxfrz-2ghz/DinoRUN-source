@@ -3,17 +3,19 @@ extends CharacterBody2D
 @onready var M := $"/root/Main"
 @onready var anim_sprite := $AnimatedSprite2D
 @onready var collider := $CollisionShape2D
-@onready var particles := $Particles
+@onready var particles := $Particles/Particles
 @onready var hp_bar := $HPBar
 @onready var damage_audio_player := $Audio/DamageAudioPlayer
 @onready var die_audio_player := $Audio/DieAudioPlayer
 
 const txt_particle := preload("res://src/entity/txt_particle/txt_particle.tscn")
+const DAMAGE_PARTICLES := preload("res://src/particles/damage_particles/damage_particles.tscn")
 
 @export var speed := 0.0
 @export var jump_velocity := -250.0
 @export var max_health := 5.0
 @export var damage := 0.0
+@export var damage_particles_texture: Texture2D
 
 var current_effects: Dictionary
 var current_health: float
@@ -46,6 +48,10 @@ func receive_damage(dmg: float) -> void:
 	damage_audio_player.pitch_scale = randf_range(1.0, 1.2) - dmg / 10
 	damage_audio_player.play()
 	spawn_text(str(-dmg) + "!")
+	
+	var damage_particles := DAMAGE_PARTICLES.instantiate()
+	damage_particles.texture = damage_particles_texture
+	add_child(damage_particles)
 	
 	if current_health <= 0:
 		despawn()
@@ -112,6 +118,8 @@ func despawn() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if !M.game: return
+	
 	process_effects()
 	braking()
 	

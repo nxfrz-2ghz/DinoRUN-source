@@ -60,12 +60,12 @@ func receive_damage(dmg: float) -> void:
 		spawn_text("+" + str(-dmg) + "!", Color.GREEN)
 	
 	if current_health <= 0:
-		M.get_node_or_null("CutScenes/CutScenes").play("game_over")
+		M.cutscenes.play("game_over")
 		M.C.screen_text.add_message("GAME OVER")
 		M.C.player.queue_free()
 		alive = false
 		M.game = false
-		M.get_node_or_null("CutScenes/CutScenes/RecordLabel").text = "RECORD\n" + str(M.C.way_bar.get_node_or_null("HBoxContainer/RichTextLabel").text.substr(6, 11))
+		M.cutscenes.get_node("RecordLabel").text = "RECORD\n" + str(M.C.way_bar.get_node_or_null("HBoxContainer/RichTextLabel").text.substr(6, 11))
 
 
 func receive_effects(effects: Dictionary) -> void:
@@ -202,6 +202,7 @@ func dash(direction: int) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if !M.game: return
 	
 	self.position.x -= M.E.ground.speed * Engine.time_scale
 	
@@ -254,6 +255,11 @@ func _physics_process(delta: float) -> void:
 	process_effects()
 	
 	if self.position.x < -5:
+		if M.home:
+			M.S.disk.save("home", false)
+			M.C.menu._on_restart_button_pressed()
+			return
+		
 		if leave_damage_delay.is_stopped():
 			velocity.x += 80000.0 / ((30 * int(!is_on_floor())) + 1)
 			M.C.screen_text.add_message("YOU CAN'T LEAVE")

@@ -66,8 +66,13 @@ func attack() -> void:
 			attack_delay.start()
 
 
+func take_damage() -> void:
+	M.E.dino.receive_damage(damage)
+
+
 func _physics_process(delta: float) -> void:
 	if !alive: return
+	if !M.game: return
 	
 	self.position.x -= M.E.ground.speed * Engine.time_scale
 	
@@ -94,7 +99,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func _on_attack_delay_timeout() -> void:
 	if abs(M.E.dino.position.x - self.position.x) < 30 and abs(M.E.dino.position.y - self.position.y) < 30:
-		if alive: M.E.dino.receive_damage(damage)
+		if alive: take_damage()
 
 
 func _on_jump_delay_timeout() -> void:

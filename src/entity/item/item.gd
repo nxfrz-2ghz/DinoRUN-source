@@ -36,12 +36,15 @@ func _ready() -> void:
 
 
 func _integrate_forces(state) -> void:
+	if !M.game: return
+	
 	var trans = state.transform
 	trans.origin.x -= M.E.ground.speed * Engine.time_scale
 	state.transform = trans
 
 
 func _physics_process(_delta: float) -> void:
+	if !M.game: return
 	
 	if self.position.y > 1000:
 		queue_free()

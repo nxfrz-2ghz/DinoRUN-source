@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@onready var menu := $Menu
+@onready var hud := $HUD
 @onready var screen_text := $ScreenText
 @onready var mobile := $MobileControl
 @onready var player := $HUD/HBoxContainer/AudioPlayer

@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwiwkwn1uovar"]
+
+[ext_resource type="PackedScene" uid="uid://dyla7u85dyr44" path="res://src/entity/skelet/skelet.tscn" id="1_u3nck"]
+[ext_resource type="Script" uid="uid://bjukw3kjotjmj" path="res://src/entity/skelet/fire_skelet/fire_skelet.gd" id="2_pqnjv"]
+[ext_resource type="Texture2D" uid="uid://hdy3turfe02v" path="res://res/sprites/world/circle_05.png" id="3_bau0s"]
+[ext_resource type="PackedScene" uid="uid://ciqn2labd3uyf" path="res://src/particles/particles.tscn" id="4_1ru0x"]
+[ext_resource type="Texture2D" uid="uid://bhcanjov1p5qb" path="res://res/sprites/particles/fire_particle.png" id="5_j2oro"]
+
+[node name="FireSkelet" instance=ExtResource("1_u3nck")]
+script = ExtResource("2_pqnjv")
+speed = 60.0
+max_health = 3.0
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="8"]
+color = Color(1.1575294, 0.63646865, 0, 1)
+texture = ExtResource("3_bau0s")
+
+[node name="Particles" parent="PointLight2D" index="0" instance=ExtResource("4_1ru0x")]
+position = Vector2(0, 8)
+emitting = true
+amount = 12
+texture = ExtResource("5_j2oro")
+one_shot = false
