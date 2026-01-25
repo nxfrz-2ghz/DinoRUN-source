@@ -2,6 +2,7 @@ extends PanelContainer
 
 @onready var M := $"/root/Main"
 
+@onready var audio_player := $MarginContainer/VBoxContainer/AudioPlayer
 @onready var music_scroll := $MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider
 @onready var sound_scroll := $MarginContainer/HBoxContainer/VBoxContainer/PanelContainer3/MarginContainer/VBoxContainer/HSlider
 @onready var rtx_check := $MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/MarginContainer/CheckBox

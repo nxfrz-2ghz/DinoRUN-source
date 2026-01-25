@@ -1,7 +1,7 @@
 extends Node
 
 @onready var M := $"/root/Main"
-@onready var weapon: Node2D = M.E.dino.get_node_or_null("RightArm/Weapon")
+@onready var weapon: Node2D = M.E.dino.arm.weapon
 @onready var audio := $AudioStreamPlayer
 
 const S := {
@@ -16,7 +16,7 @@ const S := {
 }
 
 const max_distance: float = 50.0
-const min_time_scale: float = 0.5
+const min_time_scale: float = 0.3
 
 const camera_default_pos := Vector2(320.0, 180.0)
 
@@ -41,14 +41,18 @@ func _physics_process(_delta: float) -> void:
 		Engine.time_scale = 1
 		return
 	
-	if closest_drop.item in weapon.weapons.keys():
-		M.C.mobile.set_super_button_text("pick up")
+	if closest_drop.item == "PC":
+		if Input.is_action_just_pressed("pickup") and !M.C.get_node("PCUI").visible:
+			M.C.get_node("PCUI").activate()
 	
-	if closest_drop.item in weapon.weapons.keys() and Input.is_action_just_pressed("pickup"):
+	elif closest_drop.item in weapon.weapons.keys() and Input.is_action_just_pressed("pickup"):
 		weapon.add_item(closest_drop.item, closest_drop.lvl)
+		for child in closest_drop.get_children():
+			if child.name == "cage":
+				M.S.upgrades.coins -= 1000
 		closest_drop.queue_free()
 	
-	elif !M.E.ground.item_spawner.items[closest_drop.item].get("weapon"):
+	elif M.E.ground.item_spawner.items["consumables"].get(closest_drop.item):
 		if closest_drop.item == "meat":
 			M.E.dino.receive_damage(-S["meat"]["heal"])
 		

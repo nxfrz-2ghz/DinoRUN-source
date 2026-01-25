@@ -2,6 +2,8 @@ extends Node
 
 @onready var M := $"/root/Main"
 
+const PC_UI := "res://src/ui/pc_ui/pcui.tscn"
+
 const res := [
 	"res://src/scene_light/scene_light.tscn",
 	"res://src/ground/ground.tscn",
@@ -48,10 +50,14 @@ func start() -> void:
 		M.cutscenes.play("start_game")
 	else:
 		M.E.dino.alive = true
-		M.C.player.get_node_or_null("AudioStreamPlayer").play_music("home")
+		M.C.menu.audio_player.get_node_or_null("AudioStreamPlayer").play_music("home")
 		M.C.screen_text.add_message("HOME")
 		M.C.mobile.onready(M.mobile)
 		M.S.time_controller.queue_free()
 		M.E.get_node("SceneLight").queue_free()
 		M.C.way_bar.queue_free()
 		M.C.hp_bar.visible = false
+		
+		var pcui: Control = load(PC_UI).instantiate()
+		pcui.visible = false
+		M.C.add_child(pcui)

@@ -45,6 +45,7 @@ func spawn_text(text: String, color: Color) -> void:
 
 func receive_damage(dmg: float) -> void:
 	if !alive: return
+	if M.C.menu.cheat_activated: return
 	
 	current_health -= dmg
 	if current_health > MAX_HEALTH * 1.5:
@@ -62,10 +63,10 @@ func receive_damage(dmg: float) -> void:
 	if current_health <= 0:
 		M.cutscenes.play("game_over")
 		M.C.screen_text.add_message("GAME OVER")
-		M.C.player.queue_free()
+		M.C.menu.audio_player.queue_free()
 		alive = false
 		M.game = false
-		M.cutscenes.get_node("RecordLabel").text = "RECORD\n" + str(M.C.way_bar.get_node_or_null("HBoxContainer/RichTextLabel").text.substr(6, 11))
+		M.cutscenes.get_node("RecordLabel").text = "RECORD\n" + str(M.C.way_bar.label.text.substr(6, 11))
 
 
 func receive_effects(effects: Dictionary) -> void:
@@ -245,8 +246,13 @@ func _physics_process(delta: float) -> void:
 	
 	# Если jump_buffer не истек или coyote_time, то делается прыжок
 	# В нем отключается коллизия, чтобы можно было запрыгнуть на платформу
-	if jump_buffer_timer > 0.0 and (is_on_floor() or !coyote_time.is_stopped()): 
-		velocity.y = JUMP_VELOCITY
+	if jump_buffer_timer > 0.0 and (is_on_floor() or !coyote_time.is_stopped()):
+		
+		if M.E.ground.location == 1:
+			velocity.y = JUMP_VELOCITY / 2 + 10
+		else:
+			velocity.y = JUMP_VELOCITY
+		
 		collider.disabled = true
 	
 	_moving()

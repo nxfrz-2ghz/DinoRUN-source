@@ -104,7 +104,3 @@ func spawn(world_seed: int, screen: Vector2	, location: int, distance: int, nigh
 		mob.modulate.r = 200
 		mob.speed *= 2
 		mob.damage *= 1.2
-	if rng.randf() <= 0.01:
-		multiply_health(mob, 0.8)
-		mob.speed *= 0.9
-		mob.add_child(mob_weapon.instantiate())

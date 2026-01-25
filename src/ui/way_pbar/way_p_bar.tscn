@@ -12,20 +12,23 @@ gradient = SubResource("Gradient_uemg0")
 width = 200
 height = 20
 
-[node name="WayPBar" type="MarginContainer"]
+[node name="WayPBar" type="PanelContainer"]
 custom_minimum_size = Vector2(260, 30)
-offset_right = 200.0
-offset_bottom = 20.0
+offset_right = 260.0
+offset_bottom = 30.0
+script = ExtResource("1_uemg0")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
-script = ExtResource("1_uemg0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/normal_font = ExtResource("2_qlty6")
@@ -34,7 +37,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="HBoxContainer"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 texture_under = ExtResource("1_k04l1")

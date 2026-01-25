@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://dg04ublnfjjh7"]
+
+[ext_resource type="Script" uid="uid://lmbqehquw87q" path="res://src/ui/pc_ui/icon/icon.gd" id="1_1f4nq"]
+[ext_resource type="Texture2D" uid="uid://bp8qpltp8b6y0" path="res://res/sprites/world/pc/executable.png" id="2_kujw4"]
+[ext_resource type="FontFile" uid="uid://dti745xfqphoj" path="res://res/fonts/Peaberry-Bold.ttf" id="3_m74io"]
+
+[node name="Icon" type="VBoxContainer"]
+alignment = 1
+script = ExtResource("1_1f4nq")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_hover = ExtResource("2_kujw4")
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton"]
+layout_mode = 0
+offset_right = 32.0
+
+[node name="Label" type="Label" parent="TextureButton"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 36.0
+offset_right = 59.666664
+offset_bottom = 53.0
+scale = Vector2(0.6, 0.6)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_m74io")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

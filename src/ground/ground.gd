@@ -102,7 +102,6 @@ func _ready() -> void:
 		tile_0.queue_free()
 		tile_1.queue_free()
 		mob_spawner.queue_free()
-		item_spawner.queue_free()
 		$AnimationPlayer.queue_free()
 		$Layers.queue_free()
 	else:
@@ -151,6 +150,7 @@ func move_tile(tile: TileMapLayer) -> void:
 			distance = 0
 			location += 1
 			$AnimationPlayer.play("change_location")
+			if location > 1: location = 1
 
 
 func gen_location_tile(loc: int, tile: TileMapLayer) -> void:
@@ -263,6 +263,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_item_spawn_cd_timeout() -> void:
 	if !M.game: return
+	if M.home: return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = location + distance + world_seed
 	$ItemSpawner/ItemSpawnCD.wait_time = randf_range(0.5, 5.0)

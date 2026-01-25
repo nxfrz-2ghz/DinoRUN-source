@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkl0igk1rjuid"]
+[gd_scene load_steps=5 format=3 uid="uid://bkl0igk1rjuid"]
 
 [ext_resource type="Script" uid="uid://bghvbv2do3njb" path="res://src/main/GUI/menu/menu.gd" id="1_5umn5"]
 [ext_resource type="FontFile" uid="uid://dti745xfqphoj" path="res://res/fonts/Peaberry-Bold.ttf" id="1_qut8v"]
+[ext_resource type="PackedScene" uid="uid://ctwwgpfuy3pul" path="res://src/audio_player/audio_player.tscn" id="3_k6ui8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5umn5"]
 bg_color = Color(0.17254902, 0.17254902, 0.17254902, 0.9411765)
@@ -19,9 +20,7 @@ script = ExtResource("1_5umn5")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_qut8v")
 bbcode_enabled = true
-text = "[wave][rainbow]<[ GAME PAUSED ]>
-
-xD"
+text = "[wave][rainbow]<[ GAME PAUSED ]>"
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -44,6 +43,10 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 5
+
+[node name="AudioPlayer" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_k6ui8")]
+layout_mode = 2
+size_flags_horizontal = 1
 
 [node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

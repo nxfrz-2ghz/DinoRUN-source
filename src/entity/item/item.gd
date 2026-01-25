@@ -17,6 +17,7 @@ extends RigidBody2D
 @export var light_energy: float
 
 var weapons_names: Array
+var acs_names: Array
 
 
 func _ready() -> void:
@@ -49,16 +50,37 @@ func _physics_process(_delta: float) -> void:
 	if self.position.y > 1000:
 		queue_free()
 	
-	if !weapons_names: weapons_names = M.E.dino.get_node_or_null("RightArm/Weapon").weapons.keys()
+	if !weapons_names: weapons_names = M.E.ground.item_spawner.items["weapons"].keys()
+	if !acs_names: acs_names = M.E.ground.item_spawner.items["acessories"].keys()
 	
-	if item in weapons_names:
+	if item == "PC":
+		if self.global_position.distance_to(M.E.dino.global_position) < 50:
+			if label.text == "":
+				var text := "[PRESS 'C' TO USE]"
+				label.text = text
+		else:
+			label.text = ""
+	
+	elif item in weapons_names:
 		if self.global_position.distance_to(M.E.dino.global_position) < 70:
 			if label.text == "":
 				var text := ""
 				if !M.mobile: text += "[PRESS 'C' TO PICKUP]\n"
+				for child in get_children():
+					if child.name == "cage":
+						text += "PRICE 1000\n"
 				text += item
-				text += "\ndmg: " + str(M.E.dino.get_node_or_null("RightArm/Weapon").weapons[item]["damage"])
+				text += "\ndmg: " + str(M.E.dino.arm.weapon.weapons[item]["damage"])
 				text += "\nlvl: " + str(lvl)
+				label.text = text
+		else:
+			label.text = ""
+	
+	elif item in acs_names:
+		if self.global_position.distance_to(M.E.dino.global_position) < 70:
+			if label.text == "":
+				var text := ""
+				#print acs name
 				label.text = text
 		else:
 			label.text = ""

@@ -1,53 +1,58 @@
 extends Node2D
 
 const ITEM := preload("res://src/entity/item/item.tscn")
+const CAGE := preload("res://src/entity/item/cage/cage.tscn")
 
 const items := {
-	"meat": {
-		"weapon": false,
-		"texture": preload("res://res/sprites/items/meat/meat.png"),
+	"consumables": {
+		"meat": {
+			"texture": preload("res://res/sprites/items/meat/meat.png"),
+		},
+		"coin": {
+			"frames": preload("res://res/sprites/items/coin/frames.tres"),
+			"light_color": Color.BISQUE,
+			"light_energy": 1.0,
+		},
 	},
-	"coin": {
-		"weapon": false,
-		"frames": preload("res://res/sprites/items/coin/frames.tres"),
-		"light_color": Color.BISQUE,
-		"light_energy": 1.0,
+	"acessories": {
+		"double_jump": {
+			"texture": preload("res://res/sprites/items/acessories/double jump.png")
+		},
+		"health_potion": {
+			"texture": preload("res://res/sprites/items/acessories/health potion.png")
+		},
+		"vampirism": {
+			"texture": preload("res://res/sprites/items/acessories/vampirism.png")
+		},
 	},
-	"pistol": {
-		"weapon": true,
-		"texture": preload("res://res/sprites/guns/3Pistol03.png"),
-	},
-	"shotgun": {
-		"weapon": true,
-		"texture": preload("res://res/sprites/guns/2Shotgun02.png"),
-	},
-	"P90": {
-		"weapon": true,
-		"texture": preload("res://res/sprites/guns/5AssaultRifle05.png"),
-	},
-	"M4": {
-		"weapon": true,
-		"texture": preload("res://res/sprites/guns/7Assoultrifle07.png"),
-	},
-	"rocket_launcher": {
-		"weapon": true,
-		"texture": preload("res://res/sprites/guns/4Explosive04.png"),
-	},
-	"sniper_rifle": {
-		"weapon": true,
-		"texture": preload("res://res/sprites/guns/4SniperRifle04.png"),
-	},
-	"toxic_gun": {
-		"weapon": true,
-		"texture": preload("res://res/sprites/guns/Toxic Gun.png"),
-	},
-	"fire_torch": {
-		"weapon": true,
-		"frames": preload("res://res/sprites/guns/torch/fire_torch_frames.tres"),
-	},
-	"base_sword": {
-		"weapon": true,
-		"texture": preload("res://res/sprites/guns/base_sword.png"),
+	"weapons": {
+		"pistol": {
+			"texture": preload("res://res/sprites/guns/3Pistol03.png"),
+		},
+		"shotgun": {
+			"texture": preload("res://res/sprites/guns/2Shotgun02.png"),
+		},
+		"P90": {
+			"texture": preload("res://res/sprites/guns/5AssaultRifle05.png"),
+		},
+		"M4": {
+			"texture": preload("res://res/sprites/guns/7Assoultrifle07.png"),
+		},
+		"rocket_launcher": {
+			"texture": preload("res://res/sprites/guns/4Explosive04.png"),
+		},
+		"sniper_rifle": {
+			"texture": preload("res://res/sprites/guns/4SniperRifle04.png"),
+		},
+		"toxic_gun": {
+			"texture": preload("res://res/sprites/guns/Toxic Gun.png"),
+		},
+		"fire_torch": {
+			"frames": preload("res://res/sprites/guns/torch/fire_torch_frames.tres"),
+		},
+		"base_sword": {
+			"texture": preload("res://res/sprites/guns/base_sword.png"),
+		},
 	},
 }
 
@@ -64,11 +69,18 @@ func spawn(world_seed: int, pos_x: int, location: int, distance: int) -> void:
 	self.position.y = -10
 	
 	var current_item: String
+	var current_type: String
 	
 	if rng.randi_range(0, 20) == 0:
-		var weapons = items.keys().filter(func(id): return items[id].weapon)
+		current_type = "weapons"
+		var weapons = items["weapons"].keys()
+		current_item = weapons[randi() % weapons.size()]
+	elif rng.randi_range(0, 20) == 0:
+		current_type = "acessories"
+		var weapons = items["acessories"].keys()
 		current_item = weapons[randi() % weapons.size()]
 	else:
+		current_type = "consumables"
 		if rng.randi_range(0, 10) == 0:
 			current_item = "meat"
 		else:
@@ -77,15 +89,20 @@ func spawn(world_seed: int, pos_x: int, location: int, distance: int) -> void:
 	item.item = current_item
 	item.lvl = location + int(randi_range(0, 10) == 10)
 	
-	if items[current_item].get("texture"):
-		item.texture = items[current_item]["texture"]
-	if items[current_item].get("frames"):
-		item.frames = items[current_item]["frames"]
-	if items[current_item].get("light_color"):
-		item.light_color = items[current_item]["light_color"]
-	if items[current_item].get("light_energy"):
-		item.light_energy = items[current_item]["light_energy"]
+	var item_data = items[current_type][current_item]
+	
+	if item_data.get("texture"):
+		item.texture = item_data["texture"]
+	if item_data.get("frames"):
+		item.frames = item_data["frames"]
+	if item_data.get("light_color"):
+		item.light_color = item_data["light_color"]
+	if item_data.get("light_energy"):
+		item.light_energy = item_data["light_energy"]
 	
 	add_child(item)
 	item.top_level = true
 	item.position = self.global_position
+	
+	if current_type == "weapons" and rng.randi_range(0,1) == 0:
+		item.add_child(CAGE.instantiate())

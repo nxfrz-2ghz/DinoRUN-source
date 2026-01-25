@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://brt7phgil0rp3"]
+[gd_scene load_steps=23 format=4 uid="uid://brt7phgil0rp3"]
 
 [ext_resource type="TileSet" uid="uid://sed48abpd3bl" path="res://res/sprites/tileset/world_tileset.tres" id="1_65h2i"]
 [ext_resource type="Texture2D" uid="uid://basse3wo5sx1q" path="res://res/sprites/world/night_sky/6.png" id="1_xoe4o"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://ciqn2labd3uyf" path="res://src/particles/particles.tscn" id="5_x43ir"]
 [ext_resource type="Texture2D" uid="uid://bhcanjov1p5qb" path="res://res/sprites/particles/fire_particle.png" id="6_0bkv4"]
 [ext_resource type="Texture2D" uid="uid://b058w6bj6xquo" path="res://res/sprites/world/Portal.png" id="8_0bkv4"]
+[ext_resource type="PackedScene" uid="uid://dywifgy45dyhs" path="res://src/entity/item/item.tscn" id="9_bk6dh"]
+[ext_resource type="SpriteFrames" uid="uid://cu06bwqian3vu" path="res://src/locations/home/pc_anim_frames.tres" id="10_5mxvq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xoe4o"]
 atlas = ExtResource("2_1w4cx")
@@ -147,7 +149,7 @@ max_health = 99999999999.0
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.27492493, 0.2842063, 0.3887746, 1)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Portal" type="AnimatedSprite2D" parent="."]
 position = Vector2(19.235, 212.5)
 scale = Vector2(2, 2.28125)
 sprite_frames = SubResource("SpriteFrames_dwlwp")
@@ -155,7 +157,7 @@ autoplay = "default"
 frame_progress = 0.7544338
 flip_h = true
 
-[node name="PointLight2D" type="PointLight2D" parent="AnimatedSprite2D"]
+[node name="PointLight2D" type="PointLight2D" parent="Portal"]
 position = Vector2(-0.48, 1.375)
 scale = Vector2(0.5, 0.53333336)
 color = Color(0.23921569, 0.4862745, 0, 1)
@@ -165,3 +167,9 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_filter_smooth = 64.0
 shadow_item_cull_mask = 0
 texture = ExtResource("4_p0il0")
+
+[node name="PC" parent="." instance=ExtResource("9_bk6dh")]
+position = Vector2(89, 94)
+item = "PC"
+frames = ExtResource("10_5mxvq")
+light_energy = 0.22

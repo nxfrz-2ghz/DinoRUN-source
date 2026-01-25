@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://tds1lyh6mmx2"]
+
+[ext_resource type="Texture2D" uid="uid://c8w0wsqx28vuj" path="res://res/sprites/items/cage.png" id="1_1fbl7"]
+
+[node name="cage" type="Sprite2D"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_1fbl7")

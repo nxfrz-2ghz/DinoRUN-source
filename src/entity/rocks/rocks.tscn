@@ -44,6 +44,7 @@ polygon = PackedVector2Array(-5, 7, -2, 6, 4, 7)
 [node name="Rocks" instance=ExtResource("1_gqpxc")]
 script = ExtResource("2_rlq6e")
 jump_velocity = -250.0
+max_health = 10.0
 damage_particles_texture = ExtResource("9_rlq6e")
 
 [node name="AnimatedSprite2D" parent="." index="0"]

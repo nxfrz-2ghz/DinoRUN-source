@@ -10,7 +10,7 @@ var coins := 0:
 
 func load_stats() -> void:
 	if M.S.disk.has("coins"):
-		coins += M.S.disk.loadd("coins")
+		coins = M.S.disk.loadd("coins")
 
 
 func save_stats() -> void:

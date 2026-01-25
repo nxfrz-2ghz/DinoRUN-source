@@ -163,7 +163,7 @@ func drop_item() -> void:
 	var drop: RigidBody2D = M.E.ground.item_spawner.ITEM.instantiate()
 	drop.item = inventory[1]["name"]
 	drop.lvl = inventory[1]["lvl"]
-	drop.texture = M.E.ground.item_spawner.items[inventory[1]["name"]]["texture"]
+	drop.texture = M.E.ground.item_spawner.items["weapons"][drop.item]["texture"]
 	M.E.ground.item_spawner.add_child(drop)
 	drop.top_level = true
 	drop.position = self.global_position

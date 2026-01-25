@@ -25,17 +25,18 @@ func _ready() -> void:
 func toogle_game_mode(on: bool) -> void:
 	C.menu.visible = !on
 	game = on
-	C.hud.visible = on
+	C.mobile.visible = on
 
 
-func _input(_event: InputEvent) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ESC") and !cutscenes.is_playing():
 		if C.menu.visible:
 			toogle_game_mode(true)
 			# Return autoscroll speed
-			E.ground.speed = E.ground.speed
+			if !home: E.ground.speed = E.ground.speed
 		else:
 			toogle_game_mode(false)
-			E.ground.blayer_1.autoscroll.x = 0
-			E.ground.blayer_2.autoscroll.x = 0
-			E.ground.sky.autoscroll.x = 0
+			if !home:
+				E.ground.blayer_1.autoscroll.x = 0
+				E.ground.blayer_2.autoscroll.x = 0
+				E.ground.sky.autoscroll.x = 0

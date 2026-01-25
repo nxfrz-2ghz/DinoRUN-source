@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://2n4qt10vm7m0"]
+[gd_scene load_steps=35 format=3 uid="uid://2n4qt10vm7m0"]
 
 [ext_resource type="Script" uid="uid://bgl0eeblg4ins" path="res://src/main/main.gd" id="1_djufw"]
 [ext_resource type="Script" uid="uid://dt5r8ge5kfj4l" path="res://src/main/scripts/scripts.gd" id="2_jkpqq"]
@@ -9,20 +9,21 @@
 [ext_resource type="AudioStream" uid="uid://dbyfciuth01e7" path="res://res/sounds/bird.mp3" id="6_frqgp"]
 [ext_resource type="Script" uid="uid://dsjb82nvhqj07" path="res://src/main/camera_2d.gd" id="6_w0wra"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="7_30cu5"]
-[ext_resource type="Texture2D" uid="uid://b2871vhbi5hsl" path="res://res/sprites/buttons/swap_button.png" id="7_frqgp"]
+[ext_resource type="Texture2D" uid="uid://c18m6virwjt22" path="res://res/sprites/buttons/swap_button.png" id="7_frqgp"]
 [ext_resource type="AudioStream" uid="uid://bh0oiyugnsxre" path="res://res/sounds/boss_summon.mp3" id="7_km7bn"]
 [ext_resource type="AudioStream" uid="uid://bqxt5lx3ru5mk" path="res://res/sounds/damage/damage_final_hit.mp3" id="7_v0ijp"]
 [ext_resource type="Script" uid="uid://d14i8wmnx6q8n" path="res://src/main/GUI/control/control.gd" id="9_erw1m"]
 [ext_resource type="Script" uid="uid://bqb3pcdwh2ijo" path="res://src/main/cutscenes/cut_scenes.gd" id="9_hmxxs"]
 [ext_resource type="Script" uid="uid://dybpm6c7gdse7" path="res://src/main/GUI/canvas_layer.gd" id="10_4tqcc"]
 [ext_resource type="Texture2D" uid="uid://bhrusqppf1g4" path="res://res/sprites/world/wall_of_flesh.png" id="10_erw1m"]
-[ext_resource type="PackedScene" uid="uid://ctwwgpfuy3pul" path="res://src/audio_player/audio_player.tscn" id="10_ibsor"]
 [ext_resource type="Script" uid="uid://cuikc43os152h" path="res://src/main/GUI/screen_text/screen_text.gd" id="11_nqfqj"]
 [ext_resource type="PackedScene" uid="uid://dtlrqceftv3g0" path="res://src/ui/way_pbar/way_p_bar.tscn" id="13_6iek0"]
 [ext_resource type="PackedScene" uid="uid://b7ibtnd3036x" path="res://src/ui/hp_bar/hp_bar.tscn" id="14_6iek0"]
 [ext_resource type="FontFile" uid="uid://dti745xfqphoj" path="res://res/fonts/Peaberry-Bold.ttf" id="14_hc2u7"]
 [ext_resource type="SpriteFrames" uid="uid://dsu6tcv7vpuxg" path="res://res/sprites/items/coin/frames.tres" id="15_g523h"]
 [ext_resource type="PackedScene" uid="uid://bkl0igk1rjuid" path="res://src/main/GUI/menu/menu.tscn" id="22_suhym"]
+[ext_resource type="Texture2D" uid="uid://da2rwwr8gb8p3" path="res://res/sprites/buttons/dash_button.png" id="23_jf15o"]
+[ext_resource type="Texture2D" uid="uid://dhujsj5583vxo" path="res://res/sprites/buttons/pickup_button.png" id="23_lpaod"]
 
 [sub_resource type="Animation" id="Animation_frqgp"]
 length = 0.001
@@ -397,10 +398,13 @@ colors = PackedColorArray(0, 0, 0, 1, 0.012617188, 0.012617188, 0.012617188, 1)
 gradient = SubResource("Gradient_7oe52")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30cu5"]
-radius = 177.6
+radius = 13.6
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4tqcc"]
-radius = 300.0
+radius = 14.3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g523h"]
+size = Vector2(160, 60)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_djufw")
@@ -495,30 +499,24 @@ sprite_frames = ExtResource("15_g523h")
 autoplay = "default"
 centered = false
 
-[node name="HUD" type="MarginContainer" parent="CanvasLayer"]
-offset_right = 394.0
-offset_bottom = 100.0
-size_flags_vertical = 8
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+[node name="HPBar" parent="CanvasLayer" instance=ExtResource("14_6iek0")]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 215.0
+offset_bottom = 45.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD"]
-layout_mode = 2
-
-[node name="AudioPlayer" parent="CanvasLayer/HUD/HBoxContainer" instance=ExtResource("10_ibsor")]
-layout_mode = 2
-size_flags_horizontal = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/HBoxContainer"]
-layout_mode = 2
-
-[node name="WayPBar" parent="CanvasLayer/HUD/HBoxContainer/VBoxContainer" instance=ExtResource("13_6iek0")]
-layout_mode = 2
-
-[node name="HPBar" parent="CanvasLayer/HUD/HBoxContainer/VBoxContainer" instance=ExtResource("14_6iek0")]
-layout_mode = 2
+[node name="WayPBar" parent="CanvasLayer" instance=ExtResource("13_6iek0")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -30.0
+offset_right = 130.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="ScreenText" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -597,95 +595,55 @@ joystick_mode = 1
 use_input_actions = false
 
 [node name="SwapButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl/RightJoystick"]
-position = Vector2(-70, 45)
-scale = Vector2(0.265, 0.265)
+position = Vector2(-40, 48)
+scale = Vector2(2.49, 2.49)
 texture_normal = ExtResource("7_frqgp")
 shape = SubResource("CircleShape2D_30cu5")
 action = "swap_button_click"
 
-[node name="SuperButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl/RightJoystick"]
-position = Vector2(-25, 206.73)
-scale = Vector2(0.14044999, 0.14044999)
+[node name="PickupButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl/RightJoystick"]
+position = Vector2(-46, 192.00002)
+scale = Vector2(2.65625, 2.460312)
+texture_normal = ExtResource("23_lpaod")
 shape = SubResource("CircleShape2D_4tqcc")
 action = "pickup"
 
-[node name="Label" type="Label" parent="CanvasLayer/MobileControl/RightJoystick/SuperButton"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -256.31885
-offset_top = -190.31665
-offset_right = 242.0791
-offset_bottom = 236.88159
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("14_hc2u7")
-theme_override_font_sizes/font_size = 196
-horizontal_alignment = 1
-autowrap_mode = 1
-
 [node name="LDashButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl/RightJoystick"]
-position = Vector2(85, -10)
-scale = Vector2(0.14044999, 0.14044999)
+position = Vector2(91.89, -19.755)
+scale = Vector2(2.415, 2.415)
 shape = SubResource("CircleShape2D_4tqcc")
 action = "l_dash"
 
-[node name="Label" type="Label" parent="CanvasLayer/MobileControl/RightJoystick/LDashButton"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -256.31885
-offset_top = -190.31665
-offset_right = 242.0791
-offset_bottom = 236.88159
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("14_hc2u7")
-theme_override_font_sizes/font_size = 144
-text = "<DASH"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/MobileControl/RightJoystick/LDashButton"]
+texture = ExtResource("23_jf15o")
+flip_h = true
 
 [node name="RDashButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl/RightJoystick"]
-position = Vector2(215, -10)
-scale = Vector2(0.14044999, 0.14044999)
+position = Vector2(182, -56)
+scale = Vector2(2.21, 2.21)
+texture_normal = ExtResource("23_jf15o")
 shape = SubResource("CircleShape2D_4tqcc")
 action = "r_dash"
 
-[node name="Label" type="Label" parent="CanvasLayer/MobileControl/RightJoystick/RDashButton"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -256.31885
-offset_top = -190.31665
-offset_right = 242.0791
-offset_bottom = 236.88159
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("14_hc2u7")
-theme_override_font_sizes/font_size = 144
-text = "DASH>"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
-
-[node name="SwitchMusicButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl"]
-position = Vector2(57, 38.999996)
+[node name="MenuButton" type="TouchScreenButton" parent="CanvasLayer/MobileControl"]
+visible = false
+position = Vector2(50, 300)
 scale = Vector2(0.265, 0.265)
-shape = SubResource("CircleShape2D_30cu5")
-action = "ui_accept"
+shape = SubResource("RectangleShape2D_g523h")
+action = "ESC"
+
+[node name="Label" type="Label" parent="CanvasLayer/MobileControl/MenuButton"]
+offset_left = -52.830193
+offset_top = -22.64151
+offset_right = 65.16981
+offset_bottom = 27.35849
+theme_override_fonts/font = ExtResource("14_hc2u7")
+theme_override_font_sizes/font_size = 46
+text = "MENU"
 
 [node name="Menu" parent="CanvasLayer" instance=ExtResource("22_suhym")]
 visible = false
-offset_top = -1.5
-offset_bottom = 1.5
+size_flags_vertical = 8
 
 [connection signal="animation_finished" from="CutScenes/CutScenes" to="CutScenes/CutScenes" method="_on_animation_finished"]
 [connection signal="timeout" from="CanvasLayer/ScreenText/Timer" to="CanvasLayer/ScreenText" method="_on_timer_timeout"]
