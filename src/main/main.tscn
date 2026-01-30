@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://2n4qt10vm7m0"]
+[gd_scene load_steps=36 format=3 uid="uid://2n4qt10vm7m0"]
 
 [ext_resource type="Script" uid="uid://bgl0eeblg4ins" path="res://src/main/main.gd" id="1_djufw"]
 [ext_resource type="Script" uid="uid://dt5r8ge5kfj4l" path="res://src/main/scripts/scripts.gd" id="2_jkpqq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c4mthg57xawfq" path="res://src/main/environment/environment.gd" id="5_jqarl"]
 [ext_resource type="Script" uid="uid://c827lkhhr1lwi" path="res://src/main/scripts/upgrades.gd" id="5_nevsn"]
 [ext_resource type="AudioStream" uid="uid://dbyfciuth01e7" path="res://res/sounds/bird.mp3" id="6_frqgp"]
+[ext_resource type="AudioStream" uid="uid://bk8gna3b4kqxi" path="res://res/sounds/buy.mp3" id="6_jf15o"]
 [ext_resource type="Script" uid="uid://dsjb82nvhqj07" path="res://src/main/camera_2d.gd" id="6_w0wra"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="7_30cu5"]
 [ext_resource type="Texture2D" uid="uid://c18m6virwjt22" path="res://res/sprites/buttons/swap_button.png" id="7_frqgp"]
@@ -421,6 +422,10 @@ script = ExtResource("4_v0ijp")
 [node name="Upgrades" type="Node" parent="Scripts"]
 script = ExtResource("5_nevsn")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Scripts/Upgrades"]
+stream = ExtResource("6_jf15o")
+bus = &"Sounds"
+
 [node name="Environment" type="Node2D" parent="."]
 script = ExtResource("5_jqarl")
 
@@ -499,24 +504,17 @@ sprite_frames = ExtResource("15_g523h")
 autoplay = "default"
 centered = false
 
-[node name="HPBar" parent="CanvasLayer" instance=ExtResource("14_6iek0")]
-offset_left = 15.0
-offset_top = 15.0
-offset_right = 215.0
-offset_bottom = 45.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 17.0
+offset_right = 280.0
+offset_bottom = 47.0
 
-[node name="WayPBar" parent="CanvasLayer" instance=ExtResource("13_6iek0")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -130.0
-offset_top = -30.0
-offset_right = 130.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="HPBar" parent="CanvasLayer/HBoxContainer" instance=ExtResource("14_6iek0")]
+layout_mode = 2
+
+[node name="WayPBar" parent="CanvasLayer/HBoxContainer" instance=ExtResource("13_6iek0")]
+layout_mode = 2
 
 [node name="ScreenText" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -561,6 +559,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -11.0
+offset_right = -11.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_erw1m")

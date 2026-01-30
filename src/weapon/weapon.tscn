@@ -253,5 +253,6 @@ bus = &"Sounds"
 
 [node name="MeleeAttackStarts" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("14_ureym")
+bus = &"Sounds"
 
 [connection signal="body_entered" from="Sprites/MeleeHitboxAttack" to="." method="_on_melee_hitbox_attack_body_entered"]

@@ -160,6 +160,7 @@ func add_item(item_name: String, lvl: int = 0) -> void:
 
 
 func drop_item() -> void:
+	if inventory[1]["name"] == "": return
 	var drop: RigidBody2D = M.E.ground.item_spawner.ITEM.instantiate()
 	drop.item = inventory[1]["name"]
 	drop.lvl = inventory[1]["lvl"]
@@ -191,8 +192,11 @@ func update_item() -> void:
 	anim_player.speed_scale = info.get("speed", 0)
 
 
-func lvl_multiplier(num: float) -> float:
-	return (0.5 * (num * inventory[1]["lvl"]))
+func lvl_multiplier(num: float, lvl: int = inventory[1]["lvl"]) -> float:
+	var weapon_levelups: int = 0
+	if M.S.acs.acs.get("weapon_levelup") and get_parent().get_parent().name == "SkeletWithGun":
+		weapon_levelups = M.S.acs.acs["weapon_levelup"]
+	return (0.5 * num * (lvl + weapon_levelups))
 
 
 func shoot() -> void:

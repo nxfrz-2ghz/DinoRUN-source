@@ -15,8 +15,11 @@ const items := {
 		},
 	},
 	"acessories": {
-		"double_jump": {
+		"extra_jump": {
 			"texture": preload("res://res/sprites/items/acessories/double jump.png")
+		},
+		"weapon_levelup": {
+			"texture": preload("res://res/sprites/items/acessories/weapon levelup.png"),
 		},
 		"health_potion": {
 			"texture": preload("res://res/sprites/items/acessories/health potion.png")

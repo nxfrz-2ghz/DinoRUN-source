@@ -4,8 +4,11 @@ extends Node
 
 var coins := 0:
 	set(value):
+		var last_couns := coins
 		coins = value
 		$"../../CanvasLayer/CoinsLabel".text = str(value)
+		if last_couns > coins:
+			$AudioStreamPlayer.play()
 
 
 func load_stats() -> void:

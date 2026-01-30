@@ -71,6 +71,7 @@ func _physics_process(_delta: float) -> void:
 						text += "PRICE 1000\n"
 				text += item
 				text += "\ndmg: " + str(M.E.dino.arm.weapon.weapons[item]["damage"])
+				if lvl > 0: text += " (+" + str(M.E.dino.arm.weapon.lvl_multiplier(M.E.dino.arm.weapon.weapons[item]["damage"], lvl)) + ")"
 				text += "\nlvl: " + str(lvl)
 				label.text = text
 		else:
@@ -79,8 +80,8 @@ func _physics_process(_delta: float) -> void:
 	elif item in acs_names:
 		if self.global_position.distance_to(M.E.dino.global_position) < 70:
 			if label.text == "":
-				var text := ""
-				#print acs name
+				var text := "[ACESSORY]\n"
+				text += item
 				label.text = text
 		else:
 			label.text = ""

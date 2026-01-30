@@ -156,6 +156,7 @@ script = ExtResource("3_kv0bq")
 [node name="DamageAudioPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("5_4032u")
 volume_db = -4.77
+bus = &"Sounds"
 
 [node name="Area2D" type="Area2D" parent="."]
 input_pickable = false
@@ -169,6 +170,7 @@ shape = SubResource("RectangleShape2D_joqhx")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area2D"]
 stream = ExtResource("6_joqhx")
 volume_db = 9.0
+bus = &"Sounds"
 
 [connection signal="timeout" from="Timers/LeaveDamageDelay" to="Timers/LeaveDamageDelay" method="_on_timeout"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

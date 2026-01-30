@@ -4,6 +4,17 @@ extends "res://src/weapon/weapon.gd"
 func _ready() -> void:
 	add_item("pistol")
 	add_item("base_sword")
+	
+	if M.S.disk.loadd("weapon") != null:
+		inventory[1]["name"] = ""
+		inventory[1]["lvl"] = 0
+		add_item(M.S.disk.loadd("weapon"))
+		M.S.disk.save("weapon", "pistol")
+
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("drop"):
+		drop_item()
 
 
 func swap_items() -> void:

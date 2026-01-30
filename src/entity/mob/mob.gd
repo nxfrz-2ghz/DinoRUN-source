@@ -115,6 +115,9 @@ func despawn() -> void:
 	die_audio_player.play()
 	alive = false
 	collider.queue_free()
+	if M.S.acs.acs.get("vampirism"):
+		for i in range(M.S.acs.acs["vampirism"]):
+			M.E.dino.receive_damage(-max_health/10)
 
 
 func _physics_process(delta: float) -> void:

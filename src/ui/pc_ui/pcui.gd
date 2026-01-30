@@ -10,6 +10,8 @@ const icon_textures := {
 	"shop" : preload("res://res/sprites/world/pc/shop.png"),
 }
 
+var ceni := {}
+
 var rng := RandomNumberGenerator.new()
 
 
@@ -43,6 +45,7 @@ func deactivate():
 	self.visible = false
 	M.game = true
 	
+	ceni = {}
 	clear_icons()
 
 
@@ -52,6 +55,7 @@ func show_shop() -> void:
 	var weapons = M.E.ground.item_spawner.items["weapons"].keys()
 	for i in range(3):
 		var item: String = weapons[rng.randi() % weapons.size()]
+		ceni[item] = "\n" + str(randi_range(1000, 9999)) + "$"
 		
 		if M.E.ground.item_spawner.items["weapons"][item].get("texture"):
 			add_icon(item, M.E.ground.item_spawner.items["weapons"][item]["texture"])

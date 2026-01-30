@@ -24,6 +24,7 @@ func loadd() -> void:
 
 
 func save() -> void:
+	apply()
 	M.S.disk.save("music_volume", M.C.menu.music_scroll.value)
 	M.S.disk.save("sound_volume", M.C.menu.sound_scroll.value)
 	M.S.disk.save("RTX_active", M.C.menu.rtx_check.button_pressed)

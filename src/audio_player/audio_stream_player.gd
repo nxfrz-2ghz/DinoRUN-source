@@ -15,7 +15,6 @@ const GAME_MUSIC := [
 	"res://res/music/21 My dirty old kamel.mp3",
 	"res://res/music/23 Paskchip(easter egg).mp3",
 	"res://res/music/25 Our darkness.mp3",
-	"res://res/music/26 MegaMan2.mp3",
 	"res://res/music/27 Scissors mix.mp3",
 	"res://res/music/29 Chaos #1.mp3",
 	"res://res/music/30 RLD Installer #10.mp3",

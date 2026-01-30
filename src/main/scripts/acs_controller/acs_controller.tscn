@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfcunwdf7k1hy"]
+
+[ext_resource type="Script" uid="uid://5hb7vmm64y0c" path="res://src/main/scripts/acs_controller/acs_controller.gd" id="1_i71fn"]
+
+[node name="AcsController" type="Node"]
+script = ExtResource("1_i71fn")

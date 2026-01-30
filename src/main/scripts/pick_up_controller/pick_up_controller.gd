@@ -46,10 +46,13 @@ func _physics_process(_delta: float) -> void:
 			M.C.get_node("PCUI").activate()
 	
 	elif closest_drop.item in weapon.weapons.keys() and Input.is_action_just_pressed("pickup"):
-		weapon.add_item(closest_drop.item, closest_drop.lvl)
 		for child in closest_drop.get_children():
 			if child.name == "cage":
-				M.S.upgrades.coins -= 1000
+				if M.S.upgrades.coins >= 1000:
+					M.S.upgrades.coins -= 1000
+				else:
+					return
+		weapon.add_item(closest_drop.item, closest_drop.lvl)
 		closest_drop.queue_free()
 	
 	elif M.E.ground.item_spawner.items["consumables"].get(closest_drop.item):
@@ -61,6 +64,18 @@ func _physics_process(_delta: float) -> void:
 			M.S.upgrades.coins += 100
 		
 		play(S[closest_drop.item]["sound"])
+		closest_drop.queue_free()
+	
+	
+	elif M.E.ground.item_spawner.items["acessories"].get(closest_drop.item) and Input.is_action_just_pressed("pickup"):
+		
+		if closest_drop.item == "health_potion":
+			M.E.dino.receive_damage(-5)
+			closest_drop.queue_free()
+			return
+		
+		M.S.acs.add(closest_drop.item)
+		M.C.hp_bar.add_acs(closest_drop.item, closest_drop.texture)
 		closest_drop.queue_free()
 	
 	

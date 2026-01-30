@@ -14,6 +14,7 @@ const scripts := [
 	"res://src/main/scripts/pick_up_controller/pick_up_controller.tscn",
 	"res://src/main/scripts/time_controller/time_controller.tscn",
 	"res://src/main/scripts/settings/settings.tscn",
+	"res://src/main/scripts/acs_controller/acs_controller.tscn",
 ]
 
 
@@ -27,6 +28,8 @@ func connect_node(node: Node) -> void:
 		M.S.time_controller = M.S.get_node_or_null("TimeController")
 	if node.name == "Settings":
 		M.S.settings = M.S.get_node_or_null("Settings")
+	if node.name == "AcsController":
+		M.S.acs = M.S.get_node_or_null("AcsController")
 
 
 func start() -> void:

@@ -6,3 +6,4 @@ extends Node
 
 var time_controller: Node
 var settings: Node
+var acs: Node

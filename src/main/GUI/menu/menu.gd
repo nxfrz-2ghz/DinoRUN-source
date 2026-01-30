@@ -20,6 +20,7 @@ func check_cheatcode():
 		print("stupid cheater!")
 		$RichTextLabel2.modulate.a = 255
 		$RichTextLabel2.text = "[wave][rainbow]CHEATS ACTIVATED"
+		M.S.upgrades.coins = INF
 
 
 func _input(_event: InputEvent) -> void:

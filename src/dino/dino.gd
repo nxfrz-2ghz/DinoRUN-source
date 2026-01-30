@@ -225,6 +225,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_down") and !$Raycasts/FallThrough.is_colliding():
 			if !alive: return
 			collider.disabled = true
+			
 			velocity.y = 1200
 	
 	if alive: 
@@ -248,10 +249,14 @@ func _physics_process(delta: float) -> void:
 	# В нем отключается коллизия, чтобы можно было запрыгнуть на платформу
 	if jump_buffer_timer > 0.0 and (is_on_floor() or !coyote_time.is_stopped()):
 		
+		var extra_jumps: int = 0
+		if M.S.acs.acs.get("extra_jump"):
+			extra_jumps = M.S.acs.acs["extra_jump"] 
+		
 		if M.E.ground.location == 1:
-			velocity.y = JUMP_VELOCITY / 2 + 10
+			velocity.y = JUMP_VELOCITY / 2 + 10 - extra_jumps * 15
 		else:
-			velocity.y = JUMP_VELOCITY
+			velocity.y = JUMP_VELOCITY - extra_jumps * 15
 		
 		collider.disabled = true
 	
