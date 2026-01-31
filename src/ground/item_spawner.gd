@@ -74,7 +74,7 @@ func spawn(world_seed: int, pos_x: int, location: int, distance: int) -> void:
 	var current_item: String
 	var current_type: String
 	
-	if rng.randi_range(0, 20) == 0:
+	if rng.randi_range(0, 18) == 0:
 		current_type = "weapons"
 		var weapons = items["weapons"].keys()
 		current_item = weapons[randi() % weapons.size()]
@@ -108,4 +108,6 @@ func spawn(world_seed: int, pos_x: int, location: int, distance: int) -> void:
 	item.position = self.global_position
 	
 	if current_type == "weapons" and rng.randi_range(0,1) == 0:
+		item.add_child(CAGE.instantiate())
+	if current_type == "acessories" and rng.randi_range(0,2) == 0:
 		item.add_child(CAGE.instantiate())

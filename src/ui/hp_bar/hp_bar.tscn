@@ -12,15 +12,9 @@ shader_parameter/progress = 0.0
 shader_parameter/progress_tail = 1.0
 shader_parameter/tail_color = Color(1, 1, 1, 1)
 
-[node name="HBoxContainer" type="HBoxContainer"]
-offset_right = 40.0
+[node name="HBoxContainer" type="VBoxContainer"]
+offset_right = 204.0
 offset_bottom = 40.0
-
-[node name="AcsContainer" type="GridContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-columns = 8
 
 [node name="HPBar" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(200, 30)
@@ -54,3 +48,9 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 5
 alignment = 2
+
+[node name="AcsContainer" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+columns = 8

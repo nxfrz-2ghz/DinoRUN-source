@@ -95,7 +95,8 @@ text = "WASD - moving
 LMB - shoot
 RMB - swap items
 Q, E - dash
-SHIFT - teleport"
+SHIFT - teleport
+C, Z - pickup/drop"
 horizontal_alignment = 1
 
 [node name="PanelContainer4" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
@@ -186,7 +187,7 @@ theme_override_constants/margin_bottom = 15
 [node name="CheckBox" type="CheckButton" parent="MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/MarginContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_qut8v")
-text = "RTX OFF "
+text = "RTX OFF"
 
 [node name="PanelContainer4" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
